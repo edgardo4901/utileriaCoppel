@@ -1,0 +1,153 @@
+C:\Users\alfonso.mendez\Documents\Visual Studio 2008\Projects\UtileriasControlProg\UtileriasControlProg\bin\Debug\UtileriasControlProg.exe.manifest
+C:\Users\alfonso.mendez\Documents\Visual Studio 2008\Projects\UtileriasControlProg\UtileriasControlProg\bin\Debug\UtileriasControlProg.application
+C:\Users\alfonso.mendez\Documents\Visual Studio 2008\Projects\UtileriasControlProg\UtileriasControlProg\bin\Debug\UtileriasControlProg.exe
+C:\Users\alfonso.mendez\Documents\Visual Studio 2008\Projects\UtileriasControlProg\UtileriasControlProg\bin\Debug\UtileriasControlProg.pdb
+C:\Users\alfonso.mendez\Documents\Visual Studio 2008\Projects\UtileriasControlProg\UtileriasControlProg\bin\Debug\Npgsql.dll
+C:\Users\alfonso.mendez\Documents\Visual Studio 2008\Projects\UtileriasControlProg\UtileriasControlProg\bin\Debug\Renci.SshNet.dll
+C:\Users\alfonso.mendez\Documents\Visual Studio 2008\Projects\UtileriasControlProg\UtileriasControlProg\bin\Debug\WinSCPnet.dll
+C:\Users\alfonso.mendez\Documents\Visual Studio 2008\Projects\UtileriasControlProg\UtileriasControlProg\bin\Debug\Mono.Security.dll
+C:\Users\alfonso.mendez\Documents\Visual Studio 2008\Projects\UtileriasControlProg\UtileriasControlProg\bin\Debug\Renci.SshNet.xml
+C:\Users\alfonso.mendez\Documents\Visual Studio 2008\Projects\UtileriasControlProg\UtileriasControlProg\bin\Debug\Npgsql.pdb
+C:\Users\alfonso.mendez\Documents\Visual Studio 2008\Projects\UtileriasControlProg\UtileriasControlProg\bin\Debug\Npgsql.xml
+C:\Users\alfonso.mendez\Documents\Visual Studio 2008\Projects\UtileriasControlProg\UtileriasControlProg\bin\Debug\de\Npgsql.resources.dll
+C:\Users\alfonso.mendez\Documents\Visual Studio 2008\Projects\UtileriasControlProg\UtileriasControlProg\bin\Debug\es\Npgsql.resources.dll
+C:\Users\alfonso.mendez\Documents\Visual Studio 2008\Projects\UtileriasControlProg\UtileriasControlProg\bin\Debug\fi\Npgsql.resources.dll
+C:\Users\alfonso.mendez\Documents\Visual Studio 2008\Projects\UtileriasControlProg\UtileriasControlProg\bin\Debug\fr\Npgsql.resources.dll
+C:\Users\alfonso.mendez\Documents\Visual Studio 2008\Projects\UtileriasControlProg\UtileriasControlProg\bin\Debug\ja\Npgsql.resources.dll
+C:\Users\alfonso.mendez\Documents\Visual Studio 2008\Projects\UtileriasControlProg\UtileriasControlProg\bin\Debug\zh-CN\Npgsql.resources.dll
+C:\Users\alfonso.mendez\Documents\Visual Studio 2008\Projects\UtileriasControlProg\UtileriasControlProg\obj\Debug\ResolveAssemblyReference.cache
+C:\Users\alfonso.mendez\Documents\Visual Studio 2008\Projects\UtileriasControlProg\UtileriasControlProg\obj\Debug\UtileriasControlProg.frmNumeroEmpleado.resources
+C:\Users\alfonso.mendez\Documents\Visual Studio 2008\Projects\UtileriasControlProg\UtileriasControlProg\obj\Debug\UtileriasControlProg.Menu.resources
+C:\Users\alfonso.mendez\Documents\Visual Studio 2008\Projects\UtileriasControlProg\UtileriasControlProg\obj\Debug\UtileriasControlProg.Properties.Resources.resources
+C:\Users\alfonso.mendez\Documents\Visual Studio 2008\Projects\UtileriasControlProg\UtileriasControlProg\obj\Debug\UtileriasControlProg.UI.Implementacion.ProgramadorEnvios.EnviosComponentes.resources
+C:\Users\alfonso.mendez\Documents\Visual Studio 2008\Projects\UtileriasControlProg\UtileriasControlProg\obj\Debug\UtileriasControlProg.UI.Implementacion.frmDetalleArchivoBase.resources
+C:\Users\alfonso.mendez\Documents\Visual Studio 2008\Projects\UtileriasControlProg\UtileriasControlProg\obj\Debug\UtileriasControlProg.UI.Implementacion.frmDetalleArchivoComparacion.resources
+C:\Users\alfonso.mendez\Documents\Visual Studio 2008\Projects\UtileriasControlProg\UtileriasControlProg\obj\Debug\UtileriasControlProg.UI.Implementacion.frmDetalleTiendasPendientes.resources
+C:\Users\alfonso.mendez\Documents\Visual Studio 2008\Projects\UtileriasControlProg\UtileriasControlProg\obj\Debug\UtileriasControlProg.UI.Implementacion.frmRevisorVersiones.resources
+C:\Users\alfonso.mendez\Documents\Visual Studio 2008\Projects\UtileriasControlProg\UtileriasControlProg\obj\Debug\UtileriasControlProg.UI.Implementacion.frmServidorBase.resources
+C:\Users\alfonso.mendez\Documents\Visual Studio 2008\Projects\UtileriasControlProg\UtileriasControlProg\obj\Debug\UtileriasControlProg.csproj.GenerateResource.Cache
+C:\Users\alfonso.mendez\Documents\Visual Studio 2008\Projects\UtileriasControlProg\UtileriasControlProg\obj\Debug\UtileriasControlProg.exe.manifest
+C:\Users\alfonso.mendez\Documents\Visual Studio 2008\Projects\UtileriasControlProg\UtileriasControlProg\obj\Debug\UtileriasControlProg.application
+C:\Users\alfonso.mendez\Documents\Visual Studio 2008\Projects\UtileriasControlProg\UtileriasControlProg\obj\Debug\UtileriasControlProg.exe
+C:\Users\alfonso.mendez\Documents\Visual Studio 2008\Projects\UtileriasControlProg\UtileriasControlProg\obj\Debug\UtileriasControlProg.pdb
+C:\AlfonsoMendez\Desarrollo\UtileriasControlProg\UtileriasControlProg\bin\Debug\UtileriasControlProg.exe
+C:\AlfonsoMendez\Desarrollo\UtileriasControlProg\UtileriasControlProg\bin\Debug\UtileriasControlProg.pdb
+C:\AlfonsoMendez\Desarrollo\UtileriasControlProg\UtileriasControlProg\bin\Debug\Npgsql.dll
+C:\AlfonsoMendez\Desarrollo\UtileriasControlProg\UtileriasControlProg\bin\Debug\Renci.SshNet.dll
+C:\AlfonsoMendez\Desarrollo\UtileriasControlProg\UtileriasControlProg\bin\Debug\WinSCPnet.dll
+C:\AlfonsoMendez\Desarrollo\UtileriasControlProg\UtileriasControlProg\bin\Debug\Mono.Security.dll
+C:\AlfonsoMendez\Desarrollo\UtileriasControlProg\UtileriasControlProg\bin\Debug\Renci.SshNet.xml
+C:\AlfonsoMendez\Desarrollo\UtileriasControlProg\UtileriasControlProg\bin\Debug\Npgsql.pdb
+C:\AlfonsoMendez\Desarrollo\UtileriasControlProg\UtileriasControlProg\bin\Debug\Npgsql.xml
+C:\AlfonsoMendez\Desarrollo\UtileriasControlProg\UtileriasControlProg\bin\Debug\de\Npgsql.resources.dll
+C:\AlfonsoMendez\Desarrollo\UtileriasControlProg\UtileriasControlProg\bin\Debug\es\Npgsql.resources.dll
+C:\AlfonsoMendez\Desarrollo\UtileriasControlProg\UtileriasControlProg\bin\Debug\fi\Npgsql.resources.dll
+C:\AlfonsoMendez\Desarrollo\UtileriasControlProg\UtileriasControlProg\bin\Debug\fr\Npgsql.resources.dll
+C:\AlfonsoMendez\Desarrollo\UtileriasControlProg\UtileriasControlProg\bin\Debug\ja\Npgsql.resources.dll
+C:\AlfonsoMendez\Desarrollo\UtileriasControlProg\UtileriasControlProg\bin\Debug\zh-CN\Npgsql.resources.dll
+C:\AlfonsoMendez\Desarrollo\UtileriasControlProg\UtileriasControlProg\obj\Debug\ResolveAssemblyReference.cache
+C:\AlfonsoMendez\Desarrollo\UtileriasControlProg\UtileriasControlProg\obj\Debug\UtileriasControlProg.frmNumeroEmpleado.resources
+C:\AlfonsoMendez\Desarrollo\UtileriasControlProg\UtileriasControlProg\obj\Debug\UtileriasControlProg.Menu.resources
+C:\AlfonsoMendez\Desarrollo\UtileriasControlProg\UtileriasControlProg\obj\Debug\UtileriasControlProg.Properties.Resources.resources
+C:\AlfonsoMendez\Desarrollo\UtileriasControlProg\UtileriasControlProg\obj\Debug\UtileriasControlProg.UI.Implementacion.ProgramadorEnvios.EnviosComponentes.resources
+C:\AlfonsoMendez\Desarrollo\UtileriasControlProg\UtileriasControlProg\obj\Debug\UtileriasControlProg.UI.Implementacion.frmDetalleArchivoBase.resources
+C:\AlfonsoMendez\Desarrollo\UtileriasControlProg\UtileriasControlProg\obj\Debug\UtileriasControlProg.UI.Implementacion.frmDetalleArchivoComparacion.resources
+C:\AlfonsoMendez\Desarrollo\UtileriasControlProg\UtileriasControlProg\obj\Debug\UtileriasControlProg.UI.Implementacion.frmDetalleTiendasPendientes.resources
+C:\AlfonsoMendez\Desarrollo\UtileriasControlProg\UtileriasControlProg\obj\Debug\UtileriasControlProg.UI.Implementacion.frmRevisorVersiones.resources
+C:\AlfonsoMendez\Desarrollo\UtileriasControlProg\UtileriasControlProg\obj\Debug\UtileriasControlProg.UI.Implementacion.frmServidorBase.resources
+C:\AlfonsoMendez\Desarrollo\UtileriasControlProg\UtileriasControlProg\obj\Debug\UtileriasControlProg.csproj.GenerateResource.Cache
+C:\AlfonsoMendez\Desarrollo\UtileriasControlProg\UtileriasControlProg\obj\Debug\UtileriasControlProg.exe
+C:\AlfonsoMendez\Desarrollo\UtileriasControlProg\UtileriasControlProg\obj\Debug\UtileriasControlProg.pdb
+C:\Users\alfonso.mendez\Desktop\Control Programacion\UtileriasControlProg\UtileriasControlProg\UtileriasControlProg\bin\Debug\UtileriasControlProg.exe
+C:\Users\alfonso.mendez\Desktop\Control Programacion\UtileriasControlProg\UtileriasControlProg\UtileriasControlProg\bin\Debug\UtileriasControlProg.pdb
+C:\Users\alfonso.mendez\Desktop\Control Programacion\UtileriasControlProg\UtileriasControlProg\UtileriasControlProg\bin\Debug\Npgsql.dll
+C:\Users\alfonso.mendez\Desktop\Control Programacion\UtileriasControlProg\UtileriasControlProg\UtileriasControlProg\bin\Debug\Renci.SshNet.dll
+C:\Users\alfonso.mendez\Desktop\Control Programacion\UtileriasControlProg\UtileriasControlProg\UtileriasControlProg\bin\Debug\WinSCPnet.dll
+C:\Users\alfonso.mendez\Desktop\Control Programacion\UtileriasControlProg\UtileriasControlProg\UtileriasControlProg\bin\Debug\Mono.Security.dll
+C:\Users\alfonso.mendez\Desktop\Control Programacion\UtileriasControlProg\UtileriasControlProg\UtileriasControlProg\bin\Debug\Npgsql.pdb
+C:\Users\alfonso.mendez\Desktop\Control Programacion\UtileriasControlProg\UtileriasControlProg\UtileriasControlProg\bin\Debug\Npgsql.xml
+C:\Users\alfonso.mendez\Desktop\Control Programacion\UtileriasControlProg\UtileriasControlProg\UtileriasControlProg\bin\Debug\Renci.SshNet.xml
+C:\Users\alfonso.mendez\Desktop\Control Programacion\UtileriasControlProg\UtileriasControlProg\UtileriasControlProg\bin\Debug\de\Npgsql.resources.dll
+C:\Users\alfonso.mendez\Desktop\Control Programacion\UtileriasControlProg\UtileriasControlProg\UtileriasControlProg\bin\Debug\es\Npgsql.resources.dll
+C:\Users\alfonso.mendez\Desktop\Control Programacion\UtileriasControlProg\UtileriasControlProg\UtileriasControlProg\bin\Debug\fi\Npgsql.resources.dll
+C:\Users\alfonso.mendez\Desktop\Control Programacion\UtileriasControlProg\UtileriasControlProg\UtileriasControlProg\bin\Debug\fr\Npgsql.resources.dll
+C:\Users\alfonso.mendez\Desktop\Control Programacion\UtileriasControlProg\UtileriasControlProg\UtileriasControlProg\bin\Debug\ja\Npgsql.resources.dll
+C:\Users\alfonso.mendez\Desktop\Control Programacion\UtileriasControlProg\UtileriasControlProg\UtileriasControlProg\bin\Debug\zh-CN\Npgsql.resources.dll
+C:\Users\alfonso.mendez\Desktop\Control Programacion\UtileriasControlProg\UtileriasControlProg\UtileriasControlProg\obj\Debug\UtileriasControlProg.csprojAssemblyReference.cache
+C:\Users\alfonso.mendez\Desktop\Control Programacion\UtileriasControlProg\UtileriasControlProg\UtileriasControlProg\obj\Debug\UtileriasControlProg.frmNumeroEmpleado.resources
+C:\Users\alfonso.mendez\Desktop\Control Programacion\UtileriasControlProg\UtileriasControlProg\UtileriasControlProg\obj\Debug\UtileriasControlProg.Menu.resources
+C:\Users\alfonso.mendez\Desktop\Control Programacion\UtileriasControlProg\UtileriasControlProg\UtileriasControlProg\obj\Debug\UtileriasControlProg.Properties.Resources.resources
+C:\Users\alfonso.mendez\Desktop\Control Programacion\UtileriasControlProg\UtileriasControlProg\UtileriasControlProg\obj\Debug\UtileriasControlProg.UI.Implementacion.MonitorDeEnlace.frmMonitorDeEnlace.resources
+C:\Users\alfonso.mendez\Desktop\Control Programacion\UtileriasControlProg\UtileriasControlProg\UtileriasControlProg\obj\Debug\UtileriasControlProg.UI.Implementacion.ProgramadorEnvios.EnviosComponentes.resources
+C:\Users\alfonso.mendez\Desktop\Control Programacion\UtileriasControlProg\UtileriasControlProg\UtileriasControlProg\obj\Debug\UtileriasControlProg.UI.Implementacion.frmDetalleArchivoBase.resources
+C:\Users\alfonso.mendez\Desktop\Control Programacion\UtileriasControlProg\UtileriasControlProg\UtileriasControlProg\obj\Debug\UtileriasControlProg.UI.Implementacion.frmDetalleArchivoComparacion.resources
+C:\Users\alfonso.mendez\Desktop\Control Programacion\UtileriasControlProg\UtileriasControlProg\UtileriasControlProg\obj\Debug\UtileriasControlProg.UI.Implementacion.frmDetalleTiendasPendientes.resources
+C:\Users\alfonso.mendez\Desktop\Control Programacion\UtileriasControlProg\UtileriasControlProg\UtileriasControlProg\obj\Debug\UtileriasControlProg.UI.Implementacion.frmRevisorVersiones.resources
+C:\Users\alfonso.mendez\Desktop\Control Programacion\UtileriasControlProg\UtileriasControlProg\UtileriasControlProg\obj\Debug\UtileriasControlProg.UI.Implementacion.frmServidorBase.resources
+C:\Users\alfonso.mendez\Desktop\Control Programacion\UtileriasControlProg\UtileriasControlProg\UtileriasControlProg\obj\Debug\UtileriasControlProg.csproj.GenerateResource.cache
+C:\Users\alfonso.mendez\Desktop\Control Programacion\UtileriasControlProg\UtileriasControlProg\UtileriasControlProg\obj\Debug\UtileriasControlProg.csproj.CoreCompileInputs.cache
+C:\Users\alfonso.mendez\Desktop\Control Programacion\UtileriasControlProg\UtileriasControlProg\UtileriasControlProg\obj\Debug\UtileriasControlProg.csproj.CopyComplete
+C:\Users\alfonso.mendez\Desktop\Control Programacion\UtileriasControlProg\UtileriasControlProg\UtileriasControlProg\obj\Debug\UtileriasControlProg.exe
+C:\Users\alfonso.mendez\Desktop\Control Programacion\UtileriasControlProg\UtileriasControlProg\UtileriasControlProg\obj\Debug\UtileriasControlProg.pdb
+C:\Users\alfonso.mendez\Desktop\Control Programacion\UtileriasControlProg\UtileriasControlProg\UtileriasControlProg\obj\Debug\UtileriasControlProg.UI.Administrador.frmPermisos.resources
+C:\x\Control Programacion\Control Programacion\UtileriasControlProg\UtileriasControlProg\UtileriasControlProg\obj\Debug\UtileriasControlProg.exe
+C:\x\Control Programacion\Control Programacion\UtileriasControlProg\UtileriasControlProg\UtileriasControlProg\obj\Debug\UtileriasControlProg.pdb
+C:\x\Control Programacion\Control Programacion\UtileriasControlProg\UtileriasControlProg\UtileriasControlProg\bin\Debug\UtileriasControlProg.exe
+C:\x\Control Programacion\Control Programacion\UtileriasControlProg\UtileriasControlProg\UtileriasControlProg\bin\Debug\UtileriasControlProg.pdb
+C:\x\Control Programacion\Control Programacion\UtileriasControlProg\UtileriasControlProg\UtileriasControlProg\bin\Debug\Npgsql.dll
+C:\x\Control Programacion\Control Programacion\UtileriasControlProg\UtileriasControlProg\UtileriasControlProg\bin\Debug\Renci.SshNet.dll
+C:\x\Control Programacion\Control Programacion\UtileriasControlProg\UtileriasControlProg\UtileriasControlProg\bin\Debug\WinSCPnet.dll
+C:\x\Control Programacion\Control Programacion\UtileriasControlProg\UtileriasControlProg\UtileriasControlProg\bin\Debug\Mono.Security.dll
+C:\x\Control Programacion\Control Programacion\UtileriasControlProg\UtileriasControlProg\UtileriasControlProg\bin\Debug\Npgsql.pdb
+C:\x\Control Programacion\Control Programacion\UtileriasControlProg\UtileriasControlProg\UtileriasControlProg\bin\Debug\Npgsql.xml
+C:\x\Control Programacion\Control Programacion\UtileriasControlProg\UtileriasControlProg\UtileriasControlProg\bin\Debug\Renci.SshNet.xml
+C:\x\Control Programacion\Control Programacion\UtileriasControlProg\UtileriasControlProg\UtileriasControlProg\bin\Debug\de\Npgsql.resources.dll
+C:\x\Control Programacion\Control Programacion\UtileriasControlProg\UtileriasControlProg\UtileriasControlProg\bin\Debug\es\Npgsql.resources.dll
+C:\x\Control Programacion\Control Programacion\UtileriasControlProg\UtileriasControlProg\UtileriasControlProg\bin\Debug\fi\Npgsql.resources.dll
+C:\x\Control Programacion\Control Programacion\UtileriasControlProg\UtileriasControlProg\UtileriasControlProg\bin\Debug\fr\Npgsql.resources.dll
+C:\x\Control Programacion\Control Programacion\UtileriasControlProg\UtileriasControlProg\UtileriasControlProg\bin\Debug\ja\Npgsql.resources.dll
+C:\x\Control Programacion\Control Programacion\UtileriasControlProg\UtileriasControlProg\UtileriasControlProg\bin\Debug\zh-CN\Npgsql.resources.dll
+C:\x\Control Programacion\Control Programacion\UtileriasControlProg\UtileriasControlProg\UtileriasControlProg\obj\Debug\UtileriasControlProg.frmNumeroEmpleado.resources
+C:\x\Control Programacion\Control Programacion\UtileriasControlProg\UtileriasControlProg\UtileriasControlProg\obj\Debug\UtileriasControlProg.Menu.resources
+C:\x\Control Programacion\Control Programacion\UtileriasControlProg\UtileriasControlProg\UtileriasControlProg\obj\Debug\UtileriasControlProg.Properties.Resources.resources
+C:\x\Control Programacion\Control Programacion\UtileriasControlProg\UtileriasControlProg\UtileriasControlProg\obj\Debug\UtileriasControlProg.UI.Administrador.frmPermisos.resources
+C:\x\Control Programacion\Control Programacion\UtileriasControlProg\UtileriasControlProg\UtileriasControlProg\obj\Debug\UtileriasControlProg.UI.Implementacion.MonitorDeEnlace.frmMonitorDeEnlace.resources
+C:\x\Control Programacion\Control Programacion\UtileriasControlProg\UtileriasControlProg\UtileriasControlProg\obj\Debug\UtileriasControlProg.UI.Implementacion.ProgramadorEnvios.EnviosComponentes.resources
+C:\x\Control Programacion\Control Programacion\UtileriasControlProg\UtileriasControlProg\UtileriasControlProg\obj\Debug\UtileriasControlProg.UI.Implementacion.frmDetalleArchivoBase.resources
+C:\x\Control Programacion\Control Programacion\UtileriasControlProg\UtileriasControlProg\UtileriasControlProg\obj\Debug\UtileriasControlProg.UI.Implementacion.frmDetalleArchivoComparacion.resources
+C:\x\Control Programacion\Control Programacion\UtileriasControlProg\UtileriasControlProg\UtileriasControlProg\obj\Debug\UtileriasControlProg.UI.Implementacion.frmDetalleTiendasPendientes.resources
+C:\x\Control Programacion\Control Programacion\UtileriasControlProg\UtileriasControlProg\UtileriasControlProg\obj\Debug\UtileriasControlProg.UI.Implementacion.frmRevisorVersiones.resources
+C:\x\Control Programacion\Control Programacion\UtileriasControlProg\UtileriasControlProg\UtileriasControlProg\obj\Debug\UtileriasControlProg.UI.Implementacion.frmServidorBase.resources
+C:\x\Control Programacion\Control Programacion\UtileriasControlProg\UtileriasControlProg\UtileriasControlProg\obj\Debug\UtileriasControlProg.csproj.GenerateResource.Cache
+C:\Users\alfonso.mendez\Desktop\Utileria Coppel\UtileriasControlProg\bin\Debug\UtileriasControlProg.exe
+C:\Users\alfonso.mendez\Desktop\Utileria Coppel\UtileriasControlProg\bin\Debug\UtileriasControlProg.pdb
+C:\Users\alfonso.mendez\Desktop\Utileria Coppel\UtileriasControlProg\bin\Debug\Npgsql.dll
+C:\Users\alfonso.mendez\Desktop\Utileria Coppel\UtileriasControlProg\bin\Debug\Renci.SshNet.dll
+C:\Users\alfonso.mendez\Desktop\Utileria Coppel\UtileriasControlProg\bin\Debug\WinSCPnet.dll
+C:\Users\alfonso.mendez\Desktop\Utileria Coppel\UtileriasControlProg\bin\Debug\Mono.Security.dll
+C:\Users\alfonso.mendez\Desktop\Utileria Coppel\UtileriasControlProg\bin\Debug\Npgsql.pdb
+C:\Users\alfonso.mendez\Desktop\Utileria Coppel\UtileriasControlProg\bin\Debug\Npgsql.xml
+C:\Users\alfonso.mendez\Desktop\Utileria Coppel\UtileriasControlProg\bin\Debug\Renci.SshNet.xml
+C:\Users\alfonso.mendez\Desktop\Utileria Coppel\UtileriasControlProg\bin\Debug\de\Npgsql.resources.dll
+C:\Users\alfonso.mendez\Desktop\Utileria Coppel\UtileriasControlProg\bin\Debug\es\Npgsql.resources.dll
+C:\Users\alfonso.mendez\Desktop\Utileria Coppel\UtileriasControlProg\bin\Debug\fi\Npgsql.resources.dll
+C:\Users\alfonso.mendez\Desktop\Utileria Coppel\UtileriasControlProg\bin\Debug\fr\Npgsql.resources.dll
+C:\Users\alfonso.mendez\Desktop\Utileria Coppel\UtileriasControlProg\bin\Debug\ja\Npgsql.resources.dll
+C:\Users\alfonso.mendez\Desktop\Utileria Coppel\UtileriasControlProg\bin\Debug\zh-CN\Npgsql.resources.dll
+C:\Users\alfonso.mendez\Desktop\Utileria Coppel\UtileriasControlProg\obj\Debug\UtileriasControlProg.csprojAssemblyReference.cache
+C:\Users\alfonso.mendez\Desktop\Utileria Coppel\UtileriasControlProg\obj\Debug\UtileriasControlProg.frmNumeroEmpleado.resources
+C:\Users\alfonso.mendez\Desktop\Utileria Coppel\UtileriasControlProg\obj\Debug\UtileriasControlProg.Menu.resources
+C:\Users\alfonso.mendez\Desktop\Utileria Coppel\UtileriasControlProg\obj\Debug\UtileriasControlProg.Properties.Resources.resources
+C:\Users\alfonso.mendez\Desktop\Utileria Coppel\UtileriasControlProg\obj\Debug\UtileriasControlProg.UI.Administrador.frmPermisos.resources
+C:\Users\alfonso.mendez\Desktop\Utileria Coppel\UtileriasControlProg\obj\Debug\UtileriasControlProg.UI.Implementacion.MonitorDeEnlace.frmMonitorDeEnlace.resources
+C:\Users\alfonso.mendez\Desktop\Utileria Coppel\UtileriasControlProg\obj\Debug\UtileriasControlProg.UI.Implementacion.ProgramadorEnvios.EnviosComponentes.resources
+C:\Users\alfonso.mendez\Desktop\Utileria Coppel\UtileriasControlProg\obj\Debug\UtileriasControlProg.UI.Implementacion.frmDetalleArchivoBase.resources
+C:\Users\alfonso.mendez\Desktop\Utileria Coppel\UtileriasControlProg\obj\Debug\UtileriasControlProg.UI.Implementacion.frmDetalleArchivoComparacion.resources
+C:\Users\alfonso.mendez\Desktop\Utileria Coppel\UtileriasControlProg\obj\Debug\UtileriasControlProg.UI.Implementacion.frmDetalleTiendasPendientes.resources
+C:\Users\alfonso.mendez\Desktop\Utileria Coppel\UtileriasControlProg\obj\Debug\UtileriasControlProg.UI.Implementacion.frmRevisorVersiones.resources
+C:\Users\alfonso.mendez\Desktop\Utileria Coppel\UtileriasControlProg\obj\Debug\UtileriasControlProg.UI.Implementacion.frmServidorBase.resources
+C:\Users\alfonso.mendez\Desktop\Utileria Coppel\UtileriasControlProg\obj\Debug\UtileriasControlProg.csproj.GenerateResource.cache
+C:\Users\alfonso.mendez\Desktop\Utileria Coppel\UtileriasControlProg\obj\Debug\UtileriasControlProg.csproj.CoreCompileInputs.cache
+C:\Users\alfonso.mendez\Desktop\Utileria Coppel\UtileriasControlProg\obj\Debug\UtileriasControlProg.csproj.CopyComplete
+C:\Users\alfonso.mendez\Desktop\Utileria Coppel\UtileriasControlProg\obj\Debug\UtileriasControlProg.exe
+C:\Users\alfonso.mendez\Desktop\Utileria Coppel\UtileriasControlProg\obj\Debug\UtileriasControlProg.pdb

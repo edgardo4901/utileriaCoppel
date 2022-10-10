@@ -1,0 +1,260 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="Current" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>9.0.30729</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{6DB63764-DA14-484E-9C73-1972C453F524}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>UtileriasControlProg</RootNamespace>
+    <AssemblyName>UtileriasControlProg</AssemblyName>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <GenerateManifests>false</GenerateManifests>
+    <SignManifests>false</SignManifests>
+    <PublishUrl>\\10.43.74.163\x\sistema\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Unc</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <CreateWebPageOnPublish>true</CreateWebPageOnPublish>
+    <WebPage>publish.htm</WebPage>
+    <ApplicationRevision>3</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <PublishWizardCompleted>true</PublishWizardCompleted>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <UpgradeBackupLocation>
+    </UpgradeBackupLocation>
+    <OldToolsVersion>3.5</OldToolsVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.VisualBasic" />
+    <Reference Include="Npgsql, Version=2.0.11.92, Culture=neutral, PublicKeyToken=5d8b90d52f46fda7, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>Librerias\NPGSQL\Npgsql.dll</HintPath>
+    </Reference>
+    <Reference Include="Renci.SshNet, Version=2016.1.0.0, Culture=neutral, PublicKeyToken=1cee9f8bde3db106, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>Librerias\Renci.SshNet.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Net">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Xml.Linq">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data.DataSetExtensions">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+    <Reference Include="WinSCPnet, Version=1.5.6.8731, Culture=neutral, PublicKeyToken=2271ec4a3c56d0bf, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>Librerias\WinSCPnet.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="BO\CFtp.cs" />
+    <Compile Include="BO\CMd5.cs" />
+    <Compile Include="BO\CSocket.cs" />
+    <Compile Include="BO\CSsh.cs" />
+    <Compile Include="BO\TiendasBO.cs" />
+    <Compile Include="BO\UtileriasBO.cs" />
+    <Compile Include="DAL\TiendasDAL.cs" />
+    <Compile Include="DAL\Utilerias.cs" />
+    <Compile Include="Entity\ArchivosTienda.cs" />
+    <Compile Include="Entity\ArchivosTiendaDetalle.cs" />
+    <Compile Include="Entity\CEstructuras.cs" />
+    <Compile Include="Entity\Configuracion.cs" />
+    <Compile Include="Entity\DefaultViews.cs" />
+    <Compile Include="Entity\Enumeradores.cs" />
+    <Compile Include="Entity\Monitor.cs" />
+    <Compile Include="Entity\ServidorBase.cs" />
+    <Compile Include="Entity\Tiendas.cs" />
+    <Compile Include="frmNumeroEmpleado.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmNumeroEmpleado.Designer.cs">
+      <DependentUpon>frmNumeroEmpleado.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Huella.cs" />
+    <Compile Include="Menu.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Menu.Designer.cs">
+      <DependentUpon>Menu.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="frmNumeroEmpleado.resx">
+      <DependentUpon>frmNumeroEmpleado.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Menu.resx">
+      <DependentUpon>Menu.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\Administrador\frmPermisos.resx">
+      <DependentUpon>frmPermisos.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\Implementacion\MonitorDeEnlace\frmMonitorDeEnlace.resx">
+      <DependentUpon>frmMonitorDeEnlace.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\Implementacion\ProgramadorEnvios\EnviosComponentes.resx">
+      <DependentUpon>EnviosComponentes.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\Implementacion\RevisorVersiones\frmDetalleArchivoBase.resx">
+      <DependentUpon>frmDetalleArchivoBase.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\Implementacion\RevisorVersiones\frmDetalleArchivoComparacion.resx">
+      <DependentUpon>frmDetalleArchivoComparacion.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\Implementacion\RevisorVersiones\frmDetalleTiendasPendientes.resx">
+      <DependentUpon>frmDetalleTiendasPendientes.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\Implementacion\RevisorVersiones\frmRevisorVersiones.resx">
+      <DependentUpon>frmRevisorVersiones.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\Implementacion\RevisorVersiones\frmServidorBase.resx">
+      <DependentUpon>frmServidorBase.cs</DependentUpon>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="UI\Administrador\frmPermisos.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\Administrador\frmPermisos.Designer.cs">
+      <DependentUpon>frmPermisos.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Implementacion\MonitorDeEnlace\frmMonitorDeEnlace.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\Implementacion\MonitorDeEnlace\frmMonitorDeEnlace.Designer.cs">
+      <DependentUpon>frmMonitorDeEnlace.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Implementacion\ProgramadorEnvios\EnviosComponentes.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\Implementacion\ProgramadorEnvios\EnviosComponentes.Designer.cs">
+      <DependentUpon>EnviosComponentes.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Implementacion\ProgramadorEnvios\FolderBrowserDialogExampleForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\Implementacion\RevisorVersiones\frmDetalleArchivoBase.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\Implementacion\RevisorVersiones\frmDetalleArchivoBase.Designer.cs">
+      <DependentUpon>frmDetalleArchivoBase.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Implementacion\RevisorVersiones\frmDetalleArchivoComparacion.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\Implementacion\RevisorVersiones\frmDetalleArchivoComparacion.Designer.cs">
+      <DependentUpon>frmDetalleArchivoComparacion.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Implementacion\RevisorVersiones\frmDetalleTiendasPendientes.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\Implementacion\RevisorVersiones\frmDetalleTiendasPendientes.Designer.cs">
+      <DependentUpon>frmDetalleTiendasPendientes.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Implementacion\RevisorVersiones\frmRevisorVersiones.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\Implementacion\RevisorVersiones\frmRevisorVersiones.Designer.cs">
+      <DependentUpon>frmRevisorVersiones.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Implementacion\RevisorVersiones\frmServidorBase.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\Implementacion\RevisorVersiones\frmServidorBase.Designer.cs">
+      <DependentUpon>frmServidorBase.cs</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.2.0">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 2.0 %28x86%29</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.0">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.0 %28x86%29</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Windows.Installer.3.1">
+      <Visible>False</Visible>
+      <ProductName>Windows Installer 3.1</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="UI\Bodegas\" />
+    <Folder Include="UI\Carteras\" />
+    <Folder Include="UI\Tiendas\" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

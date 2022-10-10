@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<XmlConfiguracion>
+
+ <PostgreSql NombreConexion="sistemas2007MAS" >
+	<IP>10.44.1.117</IP>
+	<!--<IP>10.44.64.190</IP>-->
+	<User>syssistemas</User>
+	<Password>922faf66e73af118b834a551b805aa91</Password>
+	<!--<Password>922faf66e73af118b834a551b805aa91</Password>-->
+	<Database>sistemas2007</Database>
+	<Driver>{PostgreSQL}</Driver>
+  </PostgreSql>
+
+
+  <PostgreSql NombreConexion="controlservicios" >
+	<IP>controlservicios.coppel.com</IP>
+	<!--<IP>10.41.209.29</IP>-->
+	<!--<IP>10.44.64.190</IP>-->
+	<!--<User>sysservicios</User>-->
+	<User>syscontrolservicios</User>
+	<!--<Password>d11a4a6065625217c93b38ceee80cca3</Password>-->
+	<Password>5220286605d90a21ec6c5fbe4090465d</Password>
+	<Database>controlservicios</Database>
+	<Driver>{PostgreSQL}</Driver>
+  </PostgreSql>
+  
+  <PostgreSql NombreConexion="cartera" >
+	<IP>10.44.14.18</IP>
+	<!--<IP>10.44.64.190</IP>-->
+	<User>systiendacartera</User>
+	<Password>6fc8f75fd8047d07032686cfd1dca20f</Password>
+	<Database>cartera</Database>
+	<Driver>{PostgreSQL}</Driver>
+  </PostgreSql>
+  
+  <PostgreSql NombreConexion="serviciostiendas" >
+	 <IP>10.44.1.108</IP>
+	<!--<IP>10.44.64.190</IP>-->
+	<User>sysmovprocesostienda</User>
+	<Password>3b43335ed8ea4e2281513951f48d4e4c</Password>
+	<!--<Password>5220286605d90a21ec6c5fbe4090465d</Password>-->
+	<Database>serviciostiendas</Database>
+	<Driver>{PostgreSQL}</Driver>
+  </PostgreSql>
+  
+  <PostgreSql NombreConexion="sistemas2007" >
+	<IP>10.27.113.170</IP>
+	<!--<IP>10.44.64.190</IP>-->
+	<User>syssistemas</User>
+	<Password>922faf66e73af118b834a551b805aa91</Password>
+	<!--<Password>922faf66e73af118b834a551b805aa91</Password>-->
+	<Database>sistemas2007</Database>
+	<Driver>{PostgreSQL}</Driver>
+  </PostgreSql>
+  
+  <PostgreSql NombreConexion="huellasemps" >
+	<IP>10.41.215.68</IP>
+	<!--<IP>10.44.64.190</IP>-->
+	<User>syshuellasemps</User>
+	<Password>6a9333637a176e89523de10890fc4f15</Password>
+	<!--<Password>922faf66e73af118b834a551b805aa91</Password>-->
+	<Database>huellasemps</Database>
+	<Driver>{PostgreSQL}</Driver>
+  </PostgreSql>
+  
+  <PostgreSql NombreConexion="controltiendas" >
+	<IP>controltiendas.coppel.com</IP>
+	<Database>controltiendas</Database>
+	<User>sysprogsweb</User>
+	<Password>e6764612df2bbc91c3cafdb083684877</Password>
+	<Driver>{PostgreSQL}</Driver>
+  </PostgreSql>
+
+</XmlConfiguracion>
