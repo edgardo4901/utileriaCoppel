@@ -17,21 +17,20 @@ namespace UtileriasControlProg
             InitializeComponent();
         }
 
-        private void revisorVersionesToolStripMenuItem_Click(object sender, EventArgs e)
+        public void cargarReporteDinamico()
         {
             try
             {
 
-                UtileriasControlProg.UI.Implementacion.frmRevisorVersiones frmRevisor = new UtileriasControlProg.UI.Implementacion.frmRevisorVersiones();
-                frmRevisor.MdiParent = this;
-                frmRevisor.StartPosition = FormStartPosition.Manual;
-                frmRevisor.Location = new Point((this.ClientSize.Width - frmRevisor.Width) / 2,
-                       (this.ClientSize.Height - frmRevisor.Height) / 2);
-                frmRevisor.Show();
+                UtileriasControlProg.UI.Personal.frmReporteDinamico frmReporteDinamico = new UtileriasControlProg.UI.Personal.frmReporteDinamico();
+                frmReporteDinamico.MdiParent = this;
+                frmReporteDinamico.StartPosition = FormStartPosition.CenterParent;
+                frmReporteDinamico.WindowState = FormWindowState.Maximized;
+                frmReporteDinamico.Show();
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Error al instanciar el menu: Revisor versiones, Error: " + ex.Message);
+                MessageBox.Show("Error al instanciar el menu: Monitoreo de enlace, Error: " + ex.Message);
             }
         }
 
@@ -40,13 +39,7 @@ namespace UtileriasControlProg
             try
             {
 
-                UtileriasControlProg.UI.Implementacion.MonitorDeEnlace.frmMonitorDeEnlace frmRevisor = new UtileriasControlProg.UI.Implementacion.MonitorDeEnlace.frmMonitorDeEnlace();
-                frmRevisor.MdiParent = this;
-                frmRevisor.StartPosition = FormStartPosition.CenterParent;
-                frmRevisor.WindowState = FormWindowState.Maximized;
-                //frmRevisor.Location = new Point((this.ClientSize.Width - frmRevisor.Width) / 2,
-                       //(this.ClientSize.Height - frmRevisor.Height) / 2);
-                frmRevisor.Show();
+                cargarReporteDinamico();
             }
             catch (Exception ex)
             {
@@ -65,28 +58,11 @@ namespace UtileriasControlProg
             {
                 this.Close();
             }
-            
-        }
-
-        private void PermisosToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            if (Entity.Configuracion.numeroEmpleadosAdministrador.Find(x => (x == Entity.Configuracion.NumeroDeEmpleado)) > 0)
+            else
             {
-                try
-                {
-
-                    UtileriasControlProg.UI.Administrador.frmPermisos frmRevisor = new UtileriasControlProg.UI.Administrador.frmPermisos();
-                    frmRevisor.MdiParent = this;
-                    frmRevisor.StartPosition = FormStartPosition.Manual;
-                    frmRevisor.Location = new Point((this.ClientSize.Width - frmRevisor.Width) / 2,
-                           (this.ClientSize.Height - frmRevisor.Height) / 2);
-                    frmRevisor.Show();
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show("Error al instanciar el menu: Alta de permisos, Error: " + ex.Message);
-                }
+                cargarReporteDinamico();
             }
+            
         }
     }
 

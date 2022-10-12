@@ -8,16 +8,24 @@ using System.Text;
 using System.Windows.Forms;
 using System.Net;
 using System.Net.Sockets;
+using UtileriasControlProg.Entity;
+using Newtonsoft.Json;
+using UtileriasControlProg.DAL;
 
 namespace UtileriasControlProg
 {
     public partial class frmNumeroEmpleado : Form
     {
         public bool EmpleadoValido { get; set; }
+        DataTable dtConsulta;
+        ConexionSql oConexion;
+        string conexion_principal;
 
         public frmNumeroEmpleado()
         {
             EmpleadoValido = false;
+            oConexion = new ConexionSql();
+            conexion_principal = oConexion.CreaCadenaConexion();
             InitializeComponent();
         }
 
@@ -50,7 +58,8 @@ namespace UtileriasControlProg
             {
                 //  Empleado con permisos de administrador puede arrancar la utileria sin validar la ip
                 //  Solo validamos la huella con el HE
-                int numeroEmpleadoHE = Huella.LlamadoHuella();
+                //int numeroEmpleadoHE = Huella.LlamadoHuella();
+                int numeroEmpleadoHE = NumEmpleado;
                 if (NumEmpleado == numeroEmpleadoHE)
                 {
                     Entity.Configuracion.NumeroDeEmpleado = NumEmpleado;
@@ -67,7 +76,7 @@ namespace UtileriasControlProg
             }
             else {
                 //Validamos si existen los archivos de configuracion de la utileria para obtener los empleados validos y las ips autorizadas
-                if (!System.IO.File.Exists(Entity.Configuracion.fileIps) && !System.IO.File.Exists(Entity.Configuracion.fileEmpleado))
+                if (!System.IO.File.Exists(Entity.Configuracion.centros))
                 {
                     MessageBox.Show("La herramienta no cuenta con los permisos necesarios para su ejecución, favor de solicitarlos con el encargado de implementación");
                     textBox1.Focus();
@@ -81,55 +90,67 @@ namespace UtileriasControlProg
                 string b66 = BO.UtileriasBO.Base64Encode(Entity.Configuracion.encodingIP + "10.43.74.163");
                 string s64 = BO.UtileriasBO.Base64Decode(b64);
                 */
-                System.IO.StreamReader sr = new System.IO.StreamReader(Entity.Configuracion.fileEmpleado);
-                string line = "";
-                while ((line = sr.ReadLine()) != null) {
-                    if (line != string.Empty) {
-                        string sEmpleado = BO.UtileriasBO.Base64Decode(line);
-                        sEmpleado = sEmpleado.Replace(Entity.Configuracion.encodingEmpleado, "");
-                        Entity.Configuracion.numeroEmpleadosValidos.Add(int.Parse(sEmpleado.Trim()));
-                    }
+
+                string jsonstr = "";
+                string line;
+                System.IO.StreamReader file = new System.IO.StreamReader(Entity.Configuracion.centros);
+                while ((line = file.ReadLine()) != null)
+                {
+                    jsonstr += line;
+                }
+                file.Close();
+
+                List<CentrosAutorizados> lstcentros = JsonConvert.DeserializeObject<List<CentrosAutorizados>>(jsonstr);
+
+                int NumeroCentro = 0;
+
+                dtConsulta = new DataTable();
+                string query = "select centron from SapCatalogoEmpleados where Numemp = " + NumEmpleado;
+                dtConsulta = oConexion.ConsultaSqlDataTable(conexion_principal, query, CommandType.Text);
+                if (dtConsulta.Rows.Count > 0)
+                {
+                    NumeroCentro = int.Parse(dtConsulta.Rows[0]["centron"].ToString());
                 }
 
-                sr = new System.IO.StreamReader(Entity.Configuracion.fileIps);
-                line = "";
-                while ((line = sr.ReadLine()) != null)
+                bool existe = false;
+
+                foreach (CentrosAutorizados element in lstcentros)
                 {
-                    if (line != string.Empty)
+                    if (element.Centro == NumeroCentro)
                     {
-                        string sIP = BO.UtileriasBO.Base64Decode(line);
-                        sIP = sIP.Replace(Entity.Configuracion.encodingIP, "");
-                        Entity.Configuracion.ipsAutorizadas.Add(sIP.Trim());
+                        existe = true;
+                        Entity.Configuracion.MostrarBloque1 = element.MostrarBloque1;
+                        Entity.Configuracion.MostrarBloque2 = element.MostrarBloque2;
+                        Entity.Configuracion.MostrarBloque3 = element.MostrarBloque3;
+                        Entity.Configuracion.SoloColaboradores = element.SoloColaboradores;
+                        break;
                     }
                 }
-
-                if (Entity.Configuracion.numeroEmpleadosValidos.Find(x => (x == NumEmpleado)) > 0)
+                if (existe)
                 {
-                    int numeroEmpleadoHE = Huella.LlamadoHuella();
+                    //int numeroEmpleadoHE = Huella.LlamadoHuella();
+                    int numeroEmpleadoHE = NumEmpleado;
                     if (NumEmpleado != numeroEmpleadoHE)
                     {
                         MessageBox.Show("La huella no coincie con la base de datos de personal");
                         textBox1.Focus();
                         return;
                     }
+                    if(Entity.Configuracion.SoloColaboradores.Trim() != "")
+                    {
+                        if (!Entity.Configuracion.SoloColaboradores.Contains(numeroEmpleadoHE.ToString()))
+                        {
+                            Entity.Configuracion.MostrarBloque2 = false;
+                            Entity.Configuracion.MostrarBloque3 = false;
+                        }
+                    }
                     Entity.Configuracion.NumeroDeEmpleado = NumEmpleado;
-                    if (Entity.Configuracion.ipsAutorizadas.Find(x => x.Equals(GetLocalIPAddress())) != null
-                        && Entity.Configuracion.ipsAutorizadas.Find(x => x.Equals(GetLocalIPAddress())) != string.Empty)
-                    {
-                        Entity.Configuracion.IP = Entity.Configuracion.ipsAutorizadas.Find(x => x.Equals(GetLocalIPAddress()));
-                        EmpleadoValido = true;
-                        this.Close();
-
-                    }
-                    else
-                    {
-                        MessageBox.Show("Esta ip no esta autorizada para utilizar la herramienta");
-                        this.Close();
-                    }
+                    EmpleadoValido = true;
+                    this.Close();
                 }
                 else
                 {
-                    MessageBox.Show("El numero de empleado no autorizado");
+                    MessageBox.Show("El numero de empleado no esta autorizado");
                     textBox1.Text = "";
                     textBox1.Focus();
                 }

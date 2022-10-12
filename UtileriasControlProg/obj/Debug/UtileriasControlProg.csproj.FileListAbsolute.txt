@@ -151,3 +151,37 @@ C:\Users\alfonso.mendez\Desktop\Utileria Coppel\UtileriasControlProg\obj\Debug\U
 C:\Users\alfonso.mendez\Desktop\Utileria Coppel\UtileriasControlProg\obj\Debug\UtileriasControlProg.csproj.CopyComplete
 C:\Users\alfonso.mendez\Desktop\Utileria Coppel\UtileriasControlProg\obj\Debug\UtileriasControlProg.exe
 C:\Users\alfonso.mendez\Desktop\Utileria Coppel\UtileriasControlProg\obj\Debug\UtileriasControlProg.pdb
+C:\ProyectosCoppel\ProyectosExtras\utileriaCoppel\UtileriasControlProg\bin\Debug\UtileriasControlProg.exe
+C:\ProyectosCoppel\ProyectosExtras\utileriaCoppel\UtileriasControlProg\bin\Debug\UtileriasControlProg.pdb
+C:\ProyectosCoppel\ProyectosExtras\utileriaCoppel\UtileriasControlProg\bin\Debug\Npgsql.dll
+C:\ProyectosCoppel\ProyectosExtras\utileriaCoppel\UtileriasControlProg\bin\Debug\Renci.SshNet.dll
+C:\ProyectosCoppel\ProyectosExtras\utileriaCoppel\UtileriasControlProg\bin\Debug\WinSCPnet.dll
+C:\ProyectosCoppel\ProyectosExtras\utileriaCoppel\UtileriasControlProg\bin\Debug\Mono.Security.dll
+C:\ProyectosCoppel\ProyectosExtras\utileriaCoppel\UtileriasControlProg\bin\Debug\Npgsql.pdb
+C:\ProyectosCoppel\ProyectosExtras\utileriaCoppel\UtileriasControlProg\bin\Debug\Npgsql.xml
+C:\ProyectosCoppel\ProyectosExtras\utileriaCoppel\UtileriasControlProg\bin\Debug\Renci.SshNet.xml
+C:\ProyectosCoppel\ProyectosExtras\utileriaCoppel\UtileriasControlProg\bin\Debug\de\Npgsql.resources.dll
+C:\ProyectosCoppel\ProyectosExtras\utileriaCoppel\UtileriasControlProg\bin\Debug\es\Npgsql.resources.dll
+C:\ProyectosCoppel\ProyectosExtras\utileriaCoppel\UtileriasControlProg\bin\Debug\fi\Npgsql.resources.dll
+C:\ProyectosCoppel\ProyectosExtras\utileriaCoppel\UtileriasControlProg\bin\Debug\fr\Npgsql.resources.dll
+C:\ProyectosCoppel\ProyectosExtras\utileriaCoppel\UtileriasControlProg\bin\Debug\ja\Npgsql.resources.dll
+C:\ProyectosCoppel\ProyectosExtras\utileriaCoppel\UtileriasControlProg\bin\Debug\zh-CN\Npgsql.resources.dll
+C:\ProyectosCoppel\ProyectosExtras\utileriaCoppel\UtileriasControlProg\obj\Debug\UtileriasControlProg.csprojAssemblyReference.cache
+C:\ProyectosCoppel\ProyectosExtras\utileriaCoppel\UtileriasControlProg\obj\Debug\UtileriasControlProg.frmNumeroEmpleado.resources
+C:\ProyectosCoppel\ProyectosExtras\utileriaCoppel\UtileriasControlProg\obj\Debug\UtileriasControlProg.Menu.resources
+C:\ProyectosCoppel\ProyectosExtras\utileriaCoppel\UtileriasControlProg\obj\Debug\UtileriasControlProg.Properties.Resources.resources
+C:\ProyectosCoppel\ProyectosExtras\utileriaCoppel\UtileriasControlProg\obj\Debug\UtileriasControlProg.UI.Administrador.frmPermisos.resources
+C:\ProyectosCoppel\ProyectosExtras\utileriaCoppel\UtileriasControlProg\obj\Debug\UtileriasControlProg.UI.Implementacion.MonitorDeEnlace.frmMonitorDeEnlace.resources
+C:\ProyectosCoppel\ProyectosExtras\utileriaCoppel\UtileriasControlProg\obj\Debug\UtileriasControlProg.UI.Implementacion.ProgramadorEnvios.EnviosComponentes.resources
+C:\ProyectosCoppel\ProyectosExtras\utileriaCoppel\UtileriasControlProg\obj\Debug\UtileriasControlProg.UI.Implementacion.frmDetalleArchivoBase.resources
+C:\ProyectosCoppel\ProyectosExtras\utileriaCoppel\UtileriasControlProg\obj\Debug\UtileriasControlProg.UI.Implementacion.frmDetalleArchivoComparacion.resources
+C:\ProyectosCoppel\ProyectosExtras\utileriaCoppel\UtileriasControlProg\obj\Debug\UtileriasControlProg.UI.Implementacion.frmDetalleTiendasPendientes.resources
+C:\ProyectosCoppel\ProyectosExtras\utileriaCoppel\UtileriasControlProg\obj\Debug\UtileriasControlProg.UI.Implementacion.frmRevisorVersiones.resources
+C:\ProyectosCoppel\ProyectosExtras\utileriaCoppel\UtileriasControlProg\obj\Debug\UtileriasControlProg.UI.Implementacion.frmServidorBase.resources
+C:\ProyectosCoppel\ProyectosExtras\utileriaCoppel\UtileriasControlProg\obj\Debug\UtileriasControlProg.csproj.GenerateResource.cache
+C:\ProyectosCoppel\ProyectosExtras\utileriaCoppel\UtileriasControlProg\obj\Debug\UtileriasControlProg.csproj.CoreCompileInputs.cache
+C:\ProyectosCoppel\ProyectosExtras\utileriaCoppel\UtileriasControlProg\obj\Debug\UtileriasControlProg.csproj.CopyComplete
+C:\ProyectosCoppel\ProyectosExtras\utileriaCoppel\UtileriasControlProg\obj\Debug\UtileriasControlProg.exe
+C:\ProyectosCoppel\ProyectosExtras\utileriaCoppel\UtileriasControlProg\obj\Debug\UtileriasControlProg.pdb
+C:\ProyectosCoppel\ProyectosExtras\utileriaCoppel\UtileriasControlProg\obj\Debug\UtileriasControlProg.UI.Personal.frmReporteDinamico.resources
+C:\ProyectosCoppel\ProyectosExtras\utileriaCoppel\UtileriasControlProg\bin\Debug\UtileriasControlProg.exe.config

@@ -30,10 +30,7 @@
         {
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.utileriasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.revisorVersionesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.programacionDeEnviosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.administradorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.permisosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -42,8 +39,7 @@
             this.menuStrip1.GripMargin = new System.Windows.Forms.Padding(2, 2, 0, 2);
             this.menuStrip1.ImageScalingSize = new System.Drawing.Size(24, 24);
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.utileriasToolStripMenuItem,
-            this.administradorToolStripMenuItem});
+            this.utileriasToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Size = new System.Drawing.Size(1706, 33);
@@ -53,40 +49,17 @@
             // utileriasToolStripMenuItem
             // 
             this.utileriasToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.revisorVersionesToolStripMenuItem,
             this.programacionDeEnviosToolStripMenuItem});
             this.utileriasToolStripMenuItem.Name = "utileriasToolStripMenuItem";
             this.utileriasToolStripMenuItem.Size = new System.Drawing.Size(90, 29);
             this.utileriasToolStripMenuItem.Text = "Utilerias";
             // 
-            // revisorVersionesToolStripMenuItem
-            // 
-            this.revisorVersionesToolStripMenuItem.Name = "revisorVersionesToolStripMenuItem";
-            this.revisorVersionesToolStripMenuItem.Size = new System.Drawing.Size(270, 34);
-            this.revisorVersionesToolStripMenuItem.Text = "Revisor Versiones";
-            this.revisorVersionesToolStripMenuItem.Click += new System.EventHandler(this.revisorVersionesToolStripMenuItem_Click);
-            // 
             // programacionDeEnviosToolStripMenuItem
             // 
             this.programacionDeEnviosToolStripMenuItem.Name = "programacionDeEnviosToolStripMenuItem";
             this.programacionDeEnviosToolStripMenuItem.Size = new System.Drawing.Size(270, 34);
-            this.programacionDeEnviosToolStripMenuItem.Text = "Monitor de enlace";
+            this.programacionDeEnviosToolStripMenuItem.Text = "Reporte Dinamico";
             this.programacionDeEnviosToolStripMenuItem.Click += new System.EventHandler(this.programacionDeEnviosToolStripMenuItem_Click);
-            // 
-            // administradorToolStripMenuItem
-            // 
-            this.administradorToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.permisosToolStripMenuItem});
-            this.administradorToolStripMenuItem.Name = "administradorToolStripMenuItem";
-            this.administradorToolStripMenuItem.Size = new System.Drawing.Size(142, 29);
-            this.administradorToolStripMenuItem.Text = "Administrador";
-            // 
-            // permisosToolStripMenuItem
-            // 
-            this.permisosToolStripMenuItem.Name = "permisosToolStripMenuItem";
-            this.permisosToolStripMenuItem.Size = new System.Drawing.Size(270, 34);
-            this.permisosToolStripMenuItem.Text = "Permisos";
-            this.permisosToolStripMenuItem.Click += new System.EventHandler(this.PermisosToolStripMenuItem_Click);
             // 
             // Menu
             // 
@@ -113,10 +86,7 @@
 
         private System.Windows.Forms.MenuStrip menuStrip1;
         private System.Windows.Forms.ToolStripMenuItem utileriasToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem revisorVersionesToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem programacionDeEnviosToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem administradorToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem permisosToolStripMenuItem;
     }
 }
 

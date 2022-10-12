@@ -10,7 +10,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>UtileriasControlProg</RootNamespace>
     <AssemblyName>UtileriasControlProg</AssemblyName>
-    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <IsWebBootstrapper>false</IsWebBootstrapper>
     <GenerateManifests>false</GenerateManifests>
@@ -37,6 +37,7 @@
     <UpgradeBackupLocation>
     </UpgradeBackupLocation>
     <OldToolsVersion>3.5</OldToolsVersion>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -46,6 +47,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -54,9 +56,22 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="EPPlus, Version=3.1.3.0, Culture=neutral, PublicKeyToken=ea159fdaa78159a1, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\Debug\EPPlus.dll</HintPath>
+    </Reference>
+    <Reference Include="itextsharp, Version=4.0.8.0, Culture=neutral, PublicKeyToken=8354ae6d2174ddca">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\Debug\itextsharp.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.VisualBasic" />
+    <Reference Include="Newtonsoft.Json, Version=9.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\Debug\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="Npgsql, Version=2.0.11.92, Culture=neutral, PublicKeyToken=5d8b90d52f46fda7, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>Librerias\NPGSQL\Npgsql.dll</HintPath>
@@ -95,17 +110,24 @@
     <Compile Include="BO\CSsh.cs" />
     <Compile Include="BO\TiendasBO.cs" />
     <Compile Include="BO\UtileriasBO.cs" />
+    <Compile Include="DAL\Conexion.cs" />
+    <Compile Include="DAL\ConexionSql.cs" />
     <Compile Include="DAL\TiendasDAL.cs" />
     <Compile Include="DAL\Utilerias.cs" />
     <Compile Include="Entity\ArchivosTienda.cs" />
     <Compile Include="Entity\ArchivosTiendaDetalle.cs" />
+    <Compile Include="Entity\CentrosAutorizados.cs" />
     <Compile Include="Entity\CEstructuras.cs" />
     <Compile Include="Entity\Configuracion.cs" />
     <Compile Include="Entity\DefaultViews.cs" />
     <Compile Include="Entity\Enumeradores.cs" />
+    <Compile Include="Entity\EstructuraConexion.cs" />
     <Compile Include="Entity\Monitor.cs" />
+    <Compile Include="Entity\ParametrosConsultar.cs" />
     <Compile Include="Entity\ServidorBase.cs" />
     <Compile Include="Entity\Tiendas.cs" />
+    <Compile Include="Entity\ValoresComboBox.cs" />
+    <Compile Include="Entity\ValoresComboCiudad.cs" />
     <Compile Include="frmNumeroEmpleado.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -121,6 +143,12 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="UI\Personal\frmReporteDinamico.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\Personal\frmReporteDinamico.Designer.cs">
+      <DependentUpon>frmReporteDinamico.cs</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="frmNumeroEmpleado.resx">
       <DependentUpon>frmNumeroEmpleado.cs</DependentUpon>
     </EmbeddedResource>
@@ -161,6 +189,10 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <EmbeddedResource Include="UI\Personal\frmReporteDinamico.resx">
+      <DependentUpon>frmReporteDinamico.cs</DependentUpon>
+    </EmbeddedResource>
+    <None Include="app.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
