@@ -17,10 +17,49 @@ namespace UtileriasControlProg.DAL
             try
             {
                 EstructuraConexion estructuraConexion = new EstructuraConexion();
-                estructuraConexion.IP = "10.44.75.100";
+
+                //pruebas
+                /*estructuraConexion.IP = "10.44.75.100";
                 estructuraConexion.User = "syspruebasadmon";
                 estructuraConexion.CtrCo = "1299e3097";
+                estructuraConexion.Database = "Personal";*/
+
+                estructuraConexion.IP = "10.44.1.13";
+                estructuraConexion.User = "syspersonal";
+                estructuraConexion.CtrCo = "d894dab691238a6b66b73b2a94abd3f5";
                 estructuraConexion.Database = "Personal";
+
+                if (estructuraConexion != null)
+                {
+                    return string.Format("Data Source={0};Initial Catalog={1};User ID={2};Password={3}", estructuraConexion.IP, estructuraConexion.Database, estructuraConexion.User, estructuraConexion.CtrCo);
+                }
+                else
+                {
+                    return "";
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+        public string CreaCadenaConexionHojaVida()
+        {
+            try
+            {
+                EstructuraConexion estructuraConexion = new EstructuraConexion();
+
+                //pruebas
+                /*estructuraConexion.IP = "10.44.74.18";
+                estructuraConexion.User = "syshojadevida";
+                estructuraConexion.CtrCo = "91aeb44eb8010f022c1ed8481b4cc7f9";
+                estructuraConexion.Database = "hojadevida";*/
+
+                estructuraConexion.IP = "10.50.2.152";
+                estructuraConexion.User = "syshojadevida";
+                estructuraConexion.CtrCo = "98bc79c18c7944b3782bb83de6b4ead2";
+                estructuraConexion.Database = "hojadevida";
+
                 if (estructuraConexion != null)
                 {
                     return string.Format("Data Source={0};Initial Catalog={1};User ID={2};Password={3}", estructuraConexion.IP, estructuraConexion.Database, estructuraConexion.User, estructuraConexion.CtrCo);

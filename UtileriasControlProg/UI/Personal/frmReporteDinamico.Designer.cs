@@ -66,7 +66,7 @@ namespace UtileriasControlProg.UI.Personal
             this.chklstboxBloque1.FormattingEnabled = true;
             this.chklstboxBloque1.Location = new System.Drawing.Point(677, 12);
             this.chklstboxBloque1.Name = "chklstboxBloque1";
-            this.chklstboxBloque1.Size = new System.Drawing.Size(367, 372);
+            this.chklstboxBloque1.Size = new System.Drawing.Size(367, 395);
             this.chklstboxBloque1.TabIndex = 0;
             this.chklstboxBloque1.SelectedIndexChanged += new System.EventHandler(this.chklstboxBloque1_SelectedIndexChanged);
             // 
@@ -83,7 +83,7 @@ namespace UtileriasControlProg.UI.Personal
             this.chklstboxBloque3.FormattingEnabled = true;
             this.chklstboxBloque3.Location = new System.Drawing.Point(1050, 12);
             this.chklstboxBloque3.Name = "chklstboxBloque3";
-            this.chklstboxBloque3.Size = new System.Drawing.Size(335, 372);
+            this.chklstboxBloque3.Size = new System.Drawing.Size(335, 395);
             this.chklstboxBloque3.TabIndex = 2;
             // 
             // cbEmpresa
@@ -291,13 +291,12 @@ namespace UtileriasControlProg.UI.Personal
             // 
             this.dgvConsulta.AllowUserToAddRows = false;
             this.dgvConsulta.AllowUserToDeleteRows = false;
-            this.dgvConsulta.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dgvConsulta.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvConsulta.Location = new System.Drawing.Point(46, 456);
             this.dgvConsulta.Name = "dgvConsulta";
             this.dgvConsulta.RowHeadersWidth = 62;
             this.dgvConsulta.RowTemplate.Height = 28;
-            this.dgvConsulta.Size = new System.Drawing.Size(1656, 563);
+            this.dgvConsulta.Size = new System.Drawing.Size(1656, 437);
             this.dgvConsulta.TabIndex = 23;
             // 
             // btnMenos
@@ -333,7 +332,7 @@ namespace UtileriasControlProg.UI.Personal
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1750, 1072);
+            this.ClientSize = new System.Drawing.Size(1750, 916);
             this.Controls.Add(this.btnMas);
             this.Controls.Add(this.lblPagina);
             this.Controls.Add(this.btnMenos);

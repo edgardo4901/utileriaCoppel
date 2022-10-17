@@ -1,9 +1,11 @@
 ﻿using Newtonsoft.Json;
+using Npgsql;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading;
@@ -20,6 +22,8 @@ namespace UtileriasControlProg.UI.Personal
         List<ParametrosConsultar> listaBloque2;
         List<ParametrosConsultar> listaBloque3;
         string conexion_principal;
+        string conexion_hojavida;
+        ConexionPG ConexionPostgres = new ConexionPG();
         ConexionSql oConexion;
         List<ValoresComboBox> listaEmpresas;
         List<ValoresComboBox> listaRegiones;
@@ -28,11 +32,19 @@ namespace UtileriasControlProg.UI.Personal
         List<ValoresComboBox> listaZonas;
         DataTable dtCombos;
         DataTable dtConsulta;
+        DataTable dtConsultaHojaVida;
+        DataTable dtConsultaPostgres;
+        DataTable dtConsultaIncentivo;
         int pagina = 0;
         int totalpaginas = 0;
         int totalregistros = 0;
         int registrosoagina = 100;
         bool precionoEnter = false;
+        bool seleccionoAfiliado = false;
+        bool seleccionoNss = false;
+        bool seleccionoCurp = false;
+        bool seleccionoRfc = false;
+        bool seleccionoIncentivo = false;
         public frmReporteDinamico()
         {
             InitializeComponent();
@@ -43,6 +55,7 @@ namespace UtileriasControlProg.UI.Personal
             try
             {
                 conexion_principal = oConexion.CreaCadenaConexion();
+                conexion_hojavida = oConexion.CreaCadenaConexionHojaVida();
                 btnMas.Enabled = false;
                 btnMenos.Enabled = false;
                 lblPagina.Text = "";
@@ -277,6 +290,11 @@ namespace UtileriasControlProg.UI.Personal
         {
             string centroInicial = "0";
             string centrofinal = "0";
+            seleccionoAfiliado = false;
+            seleccionoCurp = false;
+            seleccionoNss = false;
+            seleccionoRfc = false;
+            seleccionoIncentivo = false;
 
             if (txtDescripcionDel.Text.ToString().Trim() != "")
             {
@@ -303,20 +321,64 @@ namespace UtileriasControlProg.UI.Personal
             List<ParametrosConsultar> seleccionadosBloque2 = chklstboxBloque2.CheckedItems.OfType<ParametrosConsultar>().ToList();
             List<ParametrosConsultar> seleccionadosBloque3 = chklstboxBloque3.CheckedItems.OfType<ParametrosConsultar>().ToList();
 
-            if ((seleccionadosBloque1.Count + seleccionadosBloque2.Count + seleccionadosBloque3.Count) <= 0)
+            /*if ((seleccionadosBloque1.Count + seleccionadosBloque2.Count + seleccionadosBloque3.Count) <= 0)
             {
                 MessageBox.Show("No se selecciono ningun valor para la consulta");
                 return;
-            }
+            }*/
 
-            string consultaValores = "Select * from (SELECT ROW_NUMBER() OVER(ORDER BY sce.Numemp DESC) AS Renglon";
+            string consultaValores = "SELECT DISTINCT ROW_NUMBER() OVER(ORDER BY sce.Numemp DESC) AS Renglon,";
             if (esExcel)
             {
-                consultaValores = "SELECT ";
+                consultaValores = "SELECT DISTINCT ";
             }
-            int contrador = 0;
+            //valores iniciales
+            consultaValores += "sce.NumeroPuesto AS [# PUESTO],";
+            consultaValores += "scp.nombre AS [NOMBRE PUESTO],";
+            consultaValores += "scciu.InicialNueva AS [CIUDAD],";
+            consultaValores += "sce.numemp as [NUMEMP],";
+            consultaValores += "RTRIM( sce.ApellidoPaterno ) + ' ' + RTRIM( sce.ApellidoMaterno ) + ' ' + RTRIM( sce.Nombre ) AS [NOMBRE],";
+            consultaValores += "scc.centron AS [CENTRO],";
+            consultaValores += "scc.NombreCentro AS [NOMBRE CENTRO],";
+            consultaValores += "DATEDIFF( MONTH, sce.FechaAlta, GETDATE() ) AS [ANTIG.],";
+            consultaValores += "CAST((sce.Sueldo/CAST(100 AS decimal(18,2))) AS decimal(18,2)) [SUELDO],";
+            consultaValores += "CAST( (COALESCE(sec.Despensa,0)/CAST(100 AS decimal(18,2))) as decimal(18,2)) [DINERO ELEC.],";
+            consultaValores += "CAST((sce.Sueldo/CAST(100 AS decimal(18,2))) AS decimal(18,2)) + CAST( (COALESCE(sec.Despensa,0)/CAST(100 AS decimal(18,2))) as decimal(18,2)) AS [TOTAL],";
+            consultaValores += "CAST(DATEDIFF( MONTH, sce.FechaNacimiento, GETDATE() ) / CAST(12 AS decimal) AS decimal(8,2)) AS [EDAD],";
+            consultaValores += "UPPER(CAST(FORMAT (sce.FechaNacimiento, 'dd/MMM/yyyy') AS VARCHAR(20))) AS [FECHA DE NACIMIENTO],";
+            consultaValores += "CASE sce.Sexo WHEN 2 THEN 'M' ELSE 'F' END [SEXO],";
+            consultaValores += "UPPER(CAST(FORMAT (sce.FechaAlta, 'dd/MMM/yyyy') AS VARCHAR(20))) AS [FECHA DE ALTA],";
+            consultaValores += "CAST(DATEDIFF( MONTH, sce.FechaAlta, GETDATE() ) / CAST(12 AS decimal) AS decimal(8,2)) AS [FECHA DE ANTIGÜEDAD],";
+            consultaValores += "sce.TipoNomina as [TIPO DE NOMINA],";
+            consultaValores += "CAST(coalesce(cs.numeroseccion,scc.Seccion) AS VARCHAR(20))+' - ' + coalesce(cs.nombre,'') as [SECCION],";
+            consultaValores += "CAST(scciu.ciudadn AS VARCHAR(20)) + ' - ' + scciu.NombreCiudad AS [NÚMERO Y NOMBRE DE CIUDAD],";
+            consultaValores += "CAST(coalesce(cr.numeroregion,0) AS VARCHAR(20)) + ' - ' + coalesce(cr.nombre,'') AS [REGIÓN],";
+            consultaValores += "CAST(coalesce(se.clave,0) AS VARCHAR(20)) + ' - ' + coalesce(se.nombre,'') AS [NÚMERO Y NOMBRE DE EMPRESA],";
+            consultaValores += "CAST('' AS VARCHAR(250)) AS [NOMBRE, NUM DE EMPLEADO Y PUESTO DE JEFE 1],";
+            consultaValores += "CAST('' AS VARCHAR(250)) AS [NOMBRE, NUM DE EMPLEADO Y PUESTO DE JEFE 2],";
+            consultaValores += "CAST('' AS VARCHAR(250)) AS [NOMBRE, NUM DE EMPLEADO Y PUESTO DE JEFE 3],";
+            consultaValores += "CAST(0 AS decimal(18,2)) AS [- SALDO FONDO TRABAJADOR],";
+            consultaValores += "CAST(0 AS decimal(18,2)) AS [- SALDO FONDO EMPRESA],";
+            consultaValores += "CAST(0 AS decimal(18,2)) AS [- SALDO CUENTA CORRIENTE],";
+            consultaValores += "CAST(0 AS decimal(18,2)) AS [- SALDO AUTOCOP],";
+            consultaValores += "CAST(0 AS decimal(18,2)) AS [- SALDO AHORRO ADICIONAL I],";
+            consultaValores += "CAST(0 AS decimal(18,2)) AS [- SALDO AHORRO ADICIONAL II],";
+            consultaValores += "CAST(0 AS decimal(18,2)) AS [- SALDO FAER TRABAJADOR],";
+            consultaValores += "CAST(0 AS decimal(18,2)) AS [- SALDO FAER EMPRESA],";
+            consultaValores += "CAST(0 AS decimal(18,2)) AS [- DESCUENTO CUENTA CORRIENTE],";
+            consultaValores += "CAST(0 AS decimal(18,2)) AS [- APORTACIÓN FONDO AHORRO EMPRESA],";
+            consultaValores += "CAST(0 AS decimal(18,2)) AS [- APORTACIÓN FONDO AHORRO EMPLEADO],";
+            consultaValores += "CAST(0 AS decimal(18,2)) AS [- APORTACIÓN ADICIONAL  FONDO AHORRO EMPLEADO],";
+            consultaValores += "CAST(0 AS decimal(18,2)) AS [- APORTACIÓN AHORRO ESPECIAL],";
+            consultaValores += "CAST(0 AS decimal(18,2)) AS [- APORTACIÓN AHORRO EXTRAORDINARIO TRABAJADOR],";
+            consultaValores += "CAST(0 AS decimal(18,2)) AS [- APORTACIÓN AHORRO EXTRAORDINARIO EMPRESA],";
+            consultaValores += "CAST(0 AS decimal(18,2)) AS [- INCENTIVO FONDO EXTRAORDINARIO EMPRESA],";
+            consultaValores += "CAST('' AS VARCHAR(250)) AS [RFC],";
+            consultaValores += "CAST('' AS VARCHAR(250)) AS [NSS],";
+            consultaValores += "CAST('' AS VARCHAR(250)) AS [CURP],";
+            consultaValores += "CAST('' AS VARCHAR(250)) AS [- Afiliado a AforeCoppel (SI/NO)]";
 
-            foreach (ParametrosConsultar element in seleccionadosBloque1)
+            /*foreach (ParametrosConsultar element in seleccionadosBloque1)
             {
                 if (consultaValores == "SELECT ")
                 {
@@ -353,36 +415,183 @@ namespace UtileriasControlProg.UI.Personal
                     consultaValores += "," + element.NombreParametro;
                 }
                 contrador++;
-            }
+            }*/
+
+            //se armarn las tablas de la seleccion y las validaciones 
 
             string TablasConsultaTotal = " SELECT COUNT(*) as Total FROM SapCatalogoEmpleados sce(NOLOCK)" +
+                                    " LEFT JOIN sapempresas se(NOLOCK) ON se.clave =  sce.Empresa" +
                                     " LEFT JOIN sapempleadoscatalogo sec(NOLOCK) ON sce.numempn = sec.numemp" +
                                     " INNER JOIN sapCatalogoPuestos scp(nolock) ON sce.numeropuesto = scp.numero" +
                                     " INNER JOIN sapCatalogoCentros scc(NOLOCK) ON scc.centron = sce.centron" +
+                                    " LEFT JOIN cat_secciones cs(NOLOCK) ON cs.numeroseccion = scc.Seccion" +
                                     " INNER JOIN sapCatalogoCiudades scciu(NOLOCK) ON scc.ciudadn = scciu.ciudadn" +
-                                    " WHERE sce.Empresa = CASE @Empresa WHEN 0 THEN sce.Empresa ELSE @Empresa END" +
-                                    " AND sce.centron between CASE @CentroInicial WHEN 0 THEN - 1 ELSE @CentroInicial END AND CASE @CentroFinal WHEN 0 THEN 999999999 ELSE @CentroFinal END" +
+                                    " LEFT JOIN cat_regiones cr (NOLOCK) ON cr.numeroregion = scciu.RegionZona" +
+                                    " WHERE sce.Cancelado = '' AND sce.Empresa = CASE @Empresa WHEN 0 THEN sce.Empresa ELSE @Empresa END" +
+                                    " AND sce.centron between CASE @CentroInicial WHEN 0 THEN -1 ELSE @CentroInicial END AND CASE @CentroFinal WHEN 0 THEN 999999999 ELSE @CentroFinal END" +
                                     " AND scciu.zonaciudad = CASE @Zona WHEN 0 THEN scciu.zonaciudad ELSE @Zona END" +
-                                    " AND scciu.regionzona = CASE @Region WHEN 0 THEN scciu.regionzona ELSE @Region END" +
+                                    " AND scciu.regionzona =  CASE @Region WHEN 0 THEN scciu.regionzona ELSE @Region END" +
                                     " AND scc.ciudadn = CASE @Ciudad WHEN 0 THEN scc.ciudadn ELSE @Ciudad END" +
-                                    " AND scc.seccion = CASE @Seccion WHEN 0 THEN scc.seccion ELSE @Seccion END";
+                                    " AND scc.seccion = CASE @Seccion WHEN 0 THEN  scc.seccion ELSE @Seccion END";
 
-            string TablasConsulta = " FROM SapCatalogoEmpleados sce(NOLOCK)" +
+            string TablasConsulta = " INTO #tmpConcentradoEmpleados FROM SapCatalogoEmpleados sce(NOLOCK)" +
+                                    " LEFT JOIN sapempresas se(NOLOCK) ON se.clave =  sce.Empresa" +
                                     " LEFT JOIN sapempleadoscatalogo sec(NOLOCK) ON sce.numempn = sec.numemp" +
                                     " INNER JOIN sapCatalogoPuestos scp(nolock) ON sce.numeropuesto = scp.numero" +
                                     " INNER JOIN sapCatalogoCentros scc(NOLOCK) ON scc.centron = sce.centron" +
-                                    " INNER JOIN sapCatalogoCiudades scciu(NOLOCK) ON scc.ciudadn = scciu.ciudadn";
+                                    " LEFT JOIN cat_secciones cs(NOLOCK) ON cs.numeroseccion = scc.Seccion" +
+                                    " INNER JOIN sapCatalogoCiudades scciu(NOLOCK) ON scc.ciudadn = scciu.ciudadn" +
+                                    " LEFT JOIN cat_regiones cr (NOLOCK) ON cr.numeroregion = scciu.RegionZona";
 
-            string validacionesConsulta = " WHERE sce.Empresa = CASE @Empresa WHEN 0 THEN sce.Empresa ELSE @Empresa END" +
-                                          " AND sce.centron between CASE @CentroInicial WHEN 0 THEN - 1 ELSE @CentroInicial END AND CASE @CentroFinal WHEN 0 THEN 999999999 ELSE @CentroFinal END" +
-                                          " AND scciu.zonaciudad = CASE @Zona WHEN 0 THEN scciu.zonaciudad ELSE @Zona END" +
-                                          " AND scciu.regionzona = CASE @Region WHEN 0 THEN scciu.regionzona ELSE @Region END" +
-                                          " AND scc.ciudadn = CASE @Ciudad WHEN 0 THEN scc.ciudadn ELSE @Ciudad END" +
-                                          " AND scc.seccion = CASE @Seccion WHEN 0 THEN scc.seccion ELSE @Seccion END ";
+            string validacionesConsulta = "  WHERE sce.Cancelado = '' AND sce.Empresa = CASE @Empresa WHEN 0 THEN sce.Empresa ELSE @Empresa END" +
+                                        " AND sce.centron between CASE @CentroInicial WHEN 0 THEN -1 ELSE @CentroInicial END AND CASE @CentroFinal WHEN 0 THEN 999999999 ELSE @CentroFinal END" +
+                                        " AND scciu.zonaciudad = CASE @Zona WHEN 0 THEN scciu.zonaciudad ELSE @Zona END" +
+                                        " AND scciu.regionzona =  CASE @Region WHEN 0 THEN scciu.regionzona ELSE @Region END" +
+                                        " AND scc.ciudadn = CASE @Ciudad WHEN 0 THEN scc.ciudadn ELSE @Ciudad END" +
+                                        " AND scc.seccion = CASE @Seccion WHEN 0 THEN  scc.seccion ELSE @Seccion END";
             if (!esExcel)
             {
-                validacionesConsulta += ") as tblConsulta where tblConsulta.Renglon between @RenglonInicial and @RenglonFinal ";
+                validacionesConsulta += " DELETE from #tmpConcentradoEmpleados where Renglon not between @RenglonInicial and @RenglonFinal ";
             }
+
+            validacionesConsulta = validacionesConsulta + " DECLARE @FechaMovimientos DATE = (SELECT MAX(fecha) FROM fondo.dbo.fa_movs_histo_edoctas)" +
+                                   " select a.NUMEMP,fdo.clavemovimiento,fdo.importe" +
+                                   " into #tmpConcentradoMovimientosFondo" +
+                                   " from #tmpConcentradoEmpleados a" +
+                                   " INNER JOIN fondo.dbo.fa_movs_histo_edoctas fdo (nolock) ON fdo.noempleado = a.NUMEMP" +
+                                   " AND  fdo.clavemovimiento in (309,138,128,304,109,170,148,198,190,180,105,301,306,141,186,176)" +
+                                   " and fdo.fecha = @FechaMovimientos" +
+                                   " INSERT INTO #tmpConcentradoMovimientosFondo" +
+                                   " select a.NUMEMP,fdo.clavemovimiento,fdo.importe" +
+                                   " from #tmpConcentradoEmpleados a" +
+                                   " INNER JOIN fondo.dbo.fa_movimientoshistodelfondo fdo (nolock) ON fdo.noempleado = a.NUMEMP" +
+                                   " AND  fdo.clavemovimiento in (047)" +
+                                   " and fdo.fechacorte = @FechaMovimientos" +
+                                   " update a set " +
+                                   " [- SALDO FONDO TRABAJADOR] = COALESCE((SELECT SUM(CAST(fdo.importe / CAST(100 AS decimal(18,2)) AS decimal(18,2))) FROM #tmpConcentradoMovimientosFondo fdo (nolock) WHERE fdo.numemp = a.numemp AND  fdo.clavemovimiento in (309,138)),0)," +
+                                   " [- SALDO FONDO EMPRESA] = COALESCE((SELECT SUM(CAST(fdo.importe / CAST(100 AS decimal(18,2)) AS decimal(18,2))) FROM #tmpConcentradoMovimientosFondo fdo (nolock) WHERE fdo.numemp = a.numemp AND  fdo.clavemovimiento in (128,304) ),0)," +
+                                   " [- SALDO CUENTA CORRIENTE] = COALESCE((SELECT SUM(CAST(fdo.importe / CAST(100 AS decimal(18,2)) AS decimal(18,2))) FROM #tmpConcentradoMovimientosFondo fdo (nolock) WHERE fdo.numemp = a.numemp AND  fdo.clavemovimiento in (109) ),0)," +
+                                   " [- SALDO AUTOCOP] = COALESCE((SELECT SUM(CAST(fdo.importe / CAST(100 AS decimal(18,2)) AS decimal(18,2))) FROM #tmpConcentradoMovimientosFondo fdo (nolock) WHERE fdo.numemp = a.numemp AND  fdo.clavemovimiento in (170) ),0)," +
+                                   " [- SALDO AHORRO ADICIONAL I] = COALESCE((SELECT SUM(CAST(fdo.importe / CAST(100 AS decimal(18,2)) AS decimal(18,2))) FROM #tmpConcentradoMovimientosFondo fdo (nolock) WHERE fdo.numemp = a.numemp AND  fdo.clavemovimiento in (148) ),0)," +
+                                   " [- SALDO AHORRO ADICIONAL II] = COALESCE((SELECT SUM(CAST(fdo.importe / CAST(100 AS decimal(18,2)) AS decimal(18,2))) FROM #tmpConcentradoMovimientosFondo fdo (nolock) WHERE fdo.numemp = a.numemp AND  fdo.clavemovimiento in (198) ),0)," +
+                                   " [- SALDO FAER TRABAJADOR] = COALESCE((SELECT SUM(CAST(fdo.importe / CAST(100 AS decimal(18,2)) AS decimal(18,2))) FROM #tmpConcentradoMovimientosFondo fdo (nolock) WHERE fdo.numemp = a.numemp AND  fdo.clavemovimiento in (190) ),0)," +
+                                   " [- SALDO FAER EMPRESA] = COALESCE((SELECT SUM(CAST(fdo.importe / CAST(100 AS decimal(18,2)) AS decimal(18,2))) FROM #tmpConcentradoMovimientosFondo fdo (nolock) WHERE fdo.numemp = a.numemp AND  fdo.clavemovimiento in (180) ),0)," +
+                                   " [- DESCUENTO CUENTA CORRIENTE] = COALESCE(( SELECT SUM(CAST(fdo.importe / CAST(100 AS decimal(18,2)) AS decimal(18,2))) FROM #tmpConcentradoMovimientosFondo fdo (nolock) WHERE fdo.numemp = a.numemp AND  fdo.clavemovimiento in (105) ),0)," +
+                                   " [- APORTACIÓN FONDO AHORRO EMPRESA] = COALESCE((SELECT SUM(CAST(fdo.importe / CAST(100 AS decimal(18,2)) AS decimal(18,2))) FROM #tmpConcentradoMovimientosFondo fdo (nolock) WHERE fdo.numemp = a.numemp AND  fdo.clavemovimiento in (301) ),0)," +
+                                   " [- APORTACIÓN FONDO AHORRO EMPLEADO] = COALESCE((SELECT SUM(CAST(fdo.importe / CAST(100 AS decimal(18,2)) AS decimal(18,2))) FROM #tmpConcentradoMovimientosFondo fdo (nolock) WHERE fdo.numemp = a.numemp AND  fdo.clavemovimiento in (306) ),0)," +
+                                   " [- APORTACIÓN ADICIONAL  FONDO AHORRO EMPLEADO] = COALESCE((SELECT SUM(CAST(fdo.importe / CAST(100 AS decimal(18,2)) AS decimal(18,2))) FROM #tmpConcentradoMovimientosFondo fdo (nolock) WHERE fdo.numemp = a.numemp AND  fdo.clavemovimiento in (141) ),0)," +
+                                   " [- APORTACIÓN AHORRO ESPECIAL] = COALESCE((SELECT SUM(CAST(fdo.importe / CAST(100 AS decimal(18,2)) AS decimal(18,2))) FROM #tmpConcentradoMovimientosFondo fdo (nolock) WHERE fdo.numemp = a.numemp AND  fdo.clavemovimiento in (047) ),0)," +
+                                   " [- APORTACIÓN AHORRO EXTRAORDINARIO TRABAJADOR] = COALESCE((SELECT SUM(CAST(fdo.importe / CAST(100 AS decimal(18,2)) AS decimal(18,2))) FROM #tmpConcentradoMovimientosFondo fdo (nolock) WHERE fdo.numemp = a.numemp AND  fdo.clavemovimiento in (186) ),0)," +
+                                   " [- APORTACIÓN AHORRO EXTRAORDINARIO EMPRESA] = COALESCE((SELECT SUM(CAST(fdo.importe / CAST(100 AS decimal(18,2)) AS decimal(18,2))) FROM #tmpConcentradoMovimientosFondo fdo (nolock) WHERE fdo.numemp = a.numemp AND  fdo.clavemovimiento in (176) ),0)" +
+                                   " from #tmpConcentradoEmpleados a" +
+                                   " update a set [NOMBRE, NUM DE EMPLEADO Y PUESTO DE JEFE 1] = COALESCE(CAST(he.numemp AS varchar(20)),'') + ' - ' +" +
+                                   " RTRIM( COALESCE(he.Nombre,'') ) +' '+ RTRIM( COALESCE(he.ApellidoPaterno,'') ) + ' ' + RTRIM( COALESCE(he.ApellidoMaterno,'') ) + ' - ' +" +
+                                   " COALESCE(CAST(hcp.numero AS varchar(20)),'') + ' ' + RTRIM(hcp.nombre)" +
+                                   " from #tmpConcentradoEmpleados a" +
+                                   " LEFT JOIN sapempleadospropuestas sep (NOLOCK) on sep.NumEmp = a.numemp" +
+                                   " LEFT JOIN hecatalogoempleados he(NOLOCK) ON he.numemp = sep.num_jefe1" +
+                                   " LEFT JOIN hecatalogopuestos hcp (NOLOCK) ON hcp.numero = he.numeropuesto" +
+                                   " where a.[TIPO DE NOMINA] = 1" +
+                                   " UPDATE a SET" +
+                                   " [NOMBRE, NUM DE EMPLEADO Y PUESTO DE JEFE 2] =" +
+                                   " COALESCE(CAST(he.numemp AS varchar(20)),'') + ' - ' +" +
+                                   " RTRIM( COALESCE(he.Nombre,'') ) +' '+ RTRIM( COALESCE(he.ApellidoPaterno,'') ) + ' ' + RTRIM( COALESCE(he.ApellidoMaterno,'') ) + ' - ' +" +
+                                   " COALESCE(CAST(hcp.numero AS varchar(20)),'') + ' ' + RTRIM(hcp.nombre)" +
+                                   " from #tmpConcentradoEmpleados a" +
+                                   " LEFT JOIN sapempleadospropuestas sep (NOLOCK) on sep.NumEmp = a.numemp" +
+                                   " LEFT JOIN hecatalogoempleados he(NOLOCK) ON he.numemp = sep.num_jefe2" +
+                                   " LEFT JOIN hecatalogopuestos hcp (NOLOCK) ON hcp.numero = he.numeropuesto" +
+                                   " where a.[TIPO DE NOMINA] = 1" +
+                                   " UPDATE a SET" +
+                                   " [NOMBRE, NUM DE EMPLEADO Y PUESTO DE JEFE 2] =" +
+                                   " COALESCE(CAST(he.numemp AS varchar(20)),'') + ' - ' +" +
+                                   " RTRIM( COALESCE(he.Nombre,'') ) +' '+ RTRIM( COALESCE(he.ApellidoPaterno,'') ) + ' ' + RTRIM( COALESCE(he.ApellidoMaterno,'') ) + ' - ' +" +
+                                   " COALESCE(CAST(hcp.numero AS varchar(20)),'') + ' ' + RTRIM(hcp.nombre)" +
+                                   " from #tmpConcentradoEmpleados a" +
+                                   " LEFT JOIN perpropuestadirectivos sep (NOLOCK) on sep.NumEmp = a.numemp" +
+                                   " LEFT JOIN hecatalogoempleados he(NOLOCK) ON he.numemp = sep.num_jefe2" +
+                                   " LEFT JOIN hecatalogopuestos hcp (NOLOCK) ON hcp.numero = he.numeropuesto" +
+                                   " where a.[TIPO DE NOMINA] = 3" +
+                                   " UPDATE a SET" +
+                                   " [NOMBRE, NUM DE EMPLEADO Y PUESTO DE JEFE 3] =" +
+                                   " COALESCE(CAST(he.numemp AS varchar(20)),'') + ' - ' +" +
+                                   " RTRIM( COALESCE(he.Nombre,'') ) +' '+ RTRIM( COALESCE(he.ApellidoPaterno,'') ) + ' ' + RTRIM( COALESCE(he.ApellidoMaterno,'') ) + ' - ' +" +
+                                   " COALESCE(CAST(hcp.numero AS varchar(20)),'') + ' ' + RTRIM(hcp.nombre)" +
+                                   " from #tmpConcentradoEmpleados a" +
+                                   " LEFT JOIN perpropuestadirectivos sep (NOLOCK) on sep.NumEmp = a.numemp" +
+                                   " LEFT JOIN hecatalogoempleados he(NOLOCK) ON he.numemp = sep.num_jefe3" +
+                                   " LEFT JOIN hecatalogopuestos hcp (NOLOCK) ON hcp.numero = he.numeropuesto" +
+                                   " where a.[TIPO DE NOMINA] = 3";
+
+            //se recorren los campos seleccionados
+            string camposSeleccionar = " SELECT Renglon,";
+            if (esExcel)
+            {
+                camposSeleccionar = " SELECT ";
+            }
+            camposSeleccionar += "[# PUESTO],";
+            camposSeleccionar += "[NOMBRE PUESTO],";
+            camposSeleccionar += "[CIUDAD],";
+            camposSeleccionar += "[NUMEMP],";
+            camposSeleccionar += "[NOMBRE],";
+            camposSeleccionar += "[CENTRO],";
+            camposSeleccionar += "[NOMBRE CENTRO],";
+            camposSeleccionar += "[ANTIG.],";
+            camposSeleccionar += "[SUELDO],";
+            camposSeleccionar += "[DINERO ELEC.],";
+            camposSeleccionar += "[TOTAL]";
+
+            int contrador = 0;
+            foreach (ParametrosConsultar element in seleccionadosBloque1)
+            {
+                camposSeleccionar += "," + element.NombreParametro;
+                contrador++;
+            }
+
+            foreach (ParametrosConsultar element in seleccionadosBloque2)
+            {
+                if(element.NombreMostrar == "Afiliado a AforeCoppel")
+                {
+                    seleccionoAfiliado = true;
+                    dtConsultaHojaVida = new DataTable();
+                }
+                else if (element.NombreMostrar == "RFC")
+                {
+                    seleccionoRfc = true;
+                }
+                else if (element.NombreMostrar == "NSS")
+                {
+                    seleccionoNss = true;
+                }
+                else if (element.NombreMostrar == "CURP")
+                {
+                    seleccionoCurp = true;
+                }
+                camposSeleccionar += "," + element.NombreParametro;
+                contrador++;
+            }
+
+            foreach (ParametrosConsultar element in seleccionadosBloque3)
+            {
+                if (element.NombreMostrar == "Incentivo Fondo extraordinario empresa")
+                {
+                    seleccionoIncentivo = true;
+                }
+                camposSeleccionar += "," + element.NombreParametro;
+                contrador++;
+            }
+
+            camposSeleccionar += " FROM #tmpConcentradoEmpleados";
+            //si es distinto de excel se ordena por el renglon insertado
+            if (!esExcel)
+            {
+                camposSeleccionar += " Order by Renglon asc";
+            }
+            camposSeleccionar += " drop table #tmpConcentradoMovimientosFondo";
+            camposSeleccionar += " drop table #tmpConcentradoEmpleados";
+
+            //se concatenan los campos seleccionados
+            validacionesConsulta += camposSeleccionar;
 
             ValoresComboBox itemSeleccionadoEmpresa = (ValoresComboBox)cbEmpresa.SelectedItem;
             ValoresComboBox itemSeleccionadoRegion = (ValoresComboBox)cbRegion.SelectedItem;
@@ -435,13 +644,27 @@ namespace UtileriasControlProg.UI.Personal
                 try
                 {
                     dtConsulta = oConexion.ConsultaSqlDataTable(conexion_principal, query, CommandType.Text);
+                    if (seleccionoAfiliado)
+                    {
+                        consultarAfiliadoHojaVida();
+                    }
+                    if (seleccionoIncentivo)
+                    {
+                        consultarDatosIncentivo();
+                    }
+                    if (seleccionoCurp || seleccionoNss || seleccionoRfc)
+                    {
+                        consultarDatosPostres();
+                    }
                     if (dtConsulta.Rows.Count <= 0)
                     {
                         respuesta = "No hay información con los filtros seleccionado";
                     }
                     else if (esExcel)
                     {
-                        respuesta = Utilerias.GenerarReporteExcel("ReporteDinamico.xlsx", "Reporte Dinamico", "", dtConsulta);
+                        string fechaactual = DateTime.Now.ToString("MMddyyyyHHmm", CultureInfo.InvariantCulture);
+                        string nombrereporte = "ReporteDinamico" + fechaactual + ".xlsx";
+                        respuesta = Utilerias.GenerarReporteExcel(nombrereporte, "Reporte Dinamico", "", dtConsulta);
                     }
                 }
                 catch (Exception ex)
@@ -467,6 +690,87 @@ namespace UtileriasControlProg.UI.Personal
 
             }
             ).Start();
+        }
+        private void consultarAfiliadoHojaVida()
+        {
+            string query = "select idu_colaborador AS [NumEmp],CASE idu_afore WHEN 568 THEN 'SI' ELSE 'NO' END [-Afiliado a AforeCoppel(SI / NO)] from[dbo].[ctl_colaboradores] where idu_colaborador in (" + numeroEmpleados() + ")";
+            dtConsultaHojaVida = oConexion.ConsultaSqlDataTable(conexion_hojavida, query, CommandType.Text);
+            foreach (DataRow row in dtConsultaHojaVida.Rows)
+            {
+                DataRow dr = dtConsulta.Select("NUMEMP=" + row["NumEmp"].ToString()).FirstOrDefault();
+                if (dr != null)
+                {
+                    dr["- Afiliado a AforeCoppel (SI/NO)"] = row["-Afiliado a AforeCoppel(SI / NO)"].ToString();
+                }
+            }
+        }
+        private void consultarDatosIncentivo()
+        {
+            dtConsultaIncentivo = new DataTable();
+            string query = "Select convert(varchar(8),cast(MAX(fecha) as date),112) as fecha FROM fondo.dbo.fa_movs_histo_edoctas";
+            dtConsultaIncentivo = oConexion.ConsultaSqlDataTable(conexion_principal, query, CommandType.Text);
+            string fecha = dtConsultaIncentivo.Rows[0]["fecha"].ToString();
+
+            dtConsultaIncentivo = new DataTable();
+            NpgsqlConnection odbc = new NpgsqlConnection();
+            if (ConexionPG.abreconexionPG(ref odbc, 1))
+            {
+                string querypos = "select numemp,tipomovimiento,importe from nommovimientoshistorico where tipomovimiento = 635 AND fecha = '" + fecha + "'" + " AND NUMEMP in (" + numeroEmpleados() + ")";
+                dtConsultaIncentivo = ConexionPG.fEjecutarConsulta(querypos, odbc);
+                foreach (DataRow row in dtConsultaIncentivo.Rows)
+                {
+                    DataRow dr = dtConsulta.Select("NUMEMP=" + row["numemp"].ToString()).FirstOrDefault();
+                    if (dr != null)
+                    {
+                        dr["- INCENTIVO FONDO EXTRAORDINARIO EMPRESA"] = double.Parse(row["importe"].ToString());
+                    }
+                }
+            }
+            ConexionPG.cierraconexionPG(odbc);
+        }
+        private void consultarDatosPostres()
+        {
+            dtConsultaPostgres = new DataTable();
+            NpgsqlConnection odbc = new NpgsqlConnection();
+            if (ConexionPG.abreconexionPG(ref odbc,1))
+            {
+                string querypos = "SELECT DISTINCT numemp,curp,rfc,numeroafiliacion FROM NomHistoricoEmpleados WHERE NUMEMP in (" + numeroEmpleados() + ")";
+                dtConsultaPostgres = ConexionPG.fEjecutarConsulta(querypos, odbc);
+
+                foreach (DataRow row in dtConsultaPostgres.Rows)
+                {
+                    DataRow dr = dtConsulta.Select("NUMEMP=" + row["NumEmp"].ToString()).FirstOrDefault();
+                    if (dr != null)
+                    {
+                        if (seleccionoRfc)
+                        {
+                            dr["RFC"] = row["rfc"].ToString();
+                        }
+                        if (seleccionoCurp)
+                        {
+                            dr["CURP"] = row["curp"].ToString();
+                        }
+                        if (seleccionoNss)
+                        {
+                            dr["NSS"] = row["numeroafiliacion"].ToString();
+                        }
+                    }
+                }
+            }
+            ConexionPG.cierraconexionPG(odbc);
+        }
+        private string numeroEmpleados()
+        {
+            string numeros = "";
+            foreach (DataRow row in dtConsulta.Rows)
+            {
+                if(numeros != "")
+                {
+                    numeros += ",";
+                }
+                numeros += row["NUMEMP"].ToString();
+            }
+            return numeros;
         }
         private void txtDelCentro_KeyPress(object sender, KeyPressEventArgs e)
         {

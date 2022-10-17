@@ -111,6 +111,7 @@
     <Compile Include="BO\TiendasBO.cs" />
     <Compile Include="BO\UtileriasBO.cs" />
     <Compile Include="DAL\Conexion.cs" />
+    <Compile Include="DAL\ConexionPG.cs" />
     <Compile Include="DAL\ConexionSql.cs" />
     <Compile Include="DAL\TiendasDAL.cs" />
     <Compile Include="DAL\Utilerias.cs" />

@@ -181,89 +181,104 @@ namespace UtileriasControlProg.DAL
 
         public static string GenerarReporteExcel(string NombreReporte, string titulo, string subTitulo, DataTable dtDatos)
         {
-            string RutaReporte = @"C:\";
+            string RutaReporte = @"C:\ReportesUtilerias\";
+            string RutaRuta = @"C:\ReportesUtilerias";
             RutaReporte += NombreReporte;
 
-            int iRenglonTitulo = 1, iRenglonEncabezado = 3, iRenglonFila = 5;
-            Document objDocumento = new Document(PageSize.A4, 15, 15, 20, 10);
-
-            using (ExcelPackage p = new ExcelPackage())
+            //si no existe carpeta la crea
+            try
             {
-                p.Workbook.Properties.Author = "ReportesCoppel";
-                p.Workbook.Properties.Title = "Reportes Coppel";
-                p.Workbook.Properties.Company = "Coppel S.A de C.V.";
-
-                /*SE AGREGA UNA NUEVA HOJA*/
-                p.Workbook.Worksheets.Add("ReporteDinamico");
-                ExcelWorksheet ws = p.Workbook.Worksheets[1];
-                ws.Name = "Hoja 1";
-
-                try
+                if (!Directory.Exists(RutaRuta))
                 {
+                    // Try to create the directory.
+                    DirectoryInfo di = Directory.CreateDirectory(RutaRuta);
+                }
 
-                    /*SE IMPRIME TITULO*/
-                    var cell_encabezado0 = ws.Cells["A" + iRenglonTitulo];
-                    cell_encabezado0.Value = titulo + "  " + subTitulo;
-                    cell_encabezado0.Style.Font.Bold = true;
-                    cell_encabezado0.Style.Font.Size = 12;
-                    using (ExcelRange r = ws.Cells["A" + iRenglonTitulo + ":I" + iRenglonTitulo])
-                    {
-                        r.Merge = true;
-                        r.Style.HorizontalAlignment = OfficeOpenXml.Style.ExcelHorizontalAlignment.CenterContinuous;
-                    }
+                int iRenglonTitulo = 1, iRenglonEncabezado = 3, iRenglonFila = 5;
+                Document objDocumento = new Document(PageSize.A4, 15, 15, 20, 10);
 
-                    int contador = 1;
-                    foreach (DataColumn column in dtDatos.Columns)
-                    {
-                        Console.Write(column.ColumnName);
-                        var cell_encabezado = ws.Cells[regresarCelda(contador) + iRenglonEncabezado];
-                        cell_encabezado.Value = column.ColumnName;
-                        cell_encabezado.Style.HorizontalAlignment = ExcelHorizontalAlignment.Center;
-                        cell_encabezado.Worksheet.Column(contador + 1).Width = 35;
-                        contador++;
-                    }
+                using (ExcelPackage p = new ExcelPackage())
+                {
+                    p.Workbook.Properties.Author = "ReportesCoppel";
+                    p.Workbook.Properties.Title = "Reportes Coppel";
+                    p.Workbook.Properties.Company = "Coppel S.A de C.V.";
 
-                    foreach (DataRow row in dtDatos.Rows)
+                    /*SE AGREGA UNA NUEVA HOJA*/
+                    p.Workbook.Worksheets.Add("ReporteDinamico");
+                    ExcelWorksheet ws = p.Workbook.Worksheets[1];
+                    ws.Name = "Hoja 1";
+
+                    try
                     {
-                        contador = 1;
-                        foreach (DataColumn column in row.Table.Columns)
+
+                        /*SE IMPRIME TITULO*/
+                        var cell_encabezado0 = ws.Cells["A" + iRenglonTitulo];
+                        cell_encabezado0.Value = titulo + "  " + subTitulo;
+                        cell_encabezado0.Style.Font.Bold = true;
+                        cell_encabezado0.Style.Font.Size = 12;
+                        using (ExcelRange r = ws.Cells["A" + iRenglonTitulo + ":I" + iRenglonTitulo])
                         {
-                            var cell_dato1 = ws.Cells[regresarCelda(contador) + (iRenglonFila)];//cantidad 1
-                            cell_dato1.Value = row[column.ColumnName];
-                            cell_dato1.Style.Border.Top.Style = OfficeOpenXml.Style.ExcelBorderStyle.Thin;
-                            cell_dato1.Style.Border.Bottom.Style = OfficeOpenXml.Style.ExcelBorderStyle.Thin;
-                            cell_dato1.Style.Border.Left.Style = OfficeOpenXml.Style.ExcelBorderStyle.Thin;
-                            cell_dato1.Style.Border.Right.Style = OfficeOpenXml.Style.ExcelBorderStyle.Thin;
-                            //cell_dato1.Style.Numberformat.Format = "  ";
-                            cell_dato1.Style.HorizontalAlignment = ExcelHorizontalAlignment.Right;
+                            r.Merge = true;
+                            r.Style.HorizontalAlignment = OfficeOpenXml.Style.ExcelHorizontalAlignment.CenterContinuous;
+                        }
+
+                        int contador = 1;
+                        foreach (DataColumn column in dtDatos.Columns)
+                        {
+                            Console.Write(column.ColumnName);
+                            var cell_encabezado = ws.Cells[regresarCelda(contador) + iRenglonEncabezado];
+                            cell_encabezado.Value = column.ColumnName;
+                            cell_encabezado.Style.HorizontalAlignment = ExcelHorizontalAlignment.Center;
+                            cell_encabezado.Worksheet.Column(contador + 1).Width = 35;
                             contador++;
                         }
-                        iRenglonFila++;
+
+                        foreach (DataRow row in dtDatos.Rows)
+                        {
+                            contador = 1;
+                            foreach (DataColumn column in row.Table.Columns)
+                            {
+                                var cell_dato1 = ws.Cells[regresarCelda(contador) + (iRenglonFila)];//cantidad 1
+                                cell_dato1.Value = row[column.ColumnName];
+                                cell_dato1.Style.Border.Top.Style = OfficeOpenXml.Style.ExcelBorderStyle.Thin;
+                                cell_dato1.Style.Border.Bottom.Style = OfficeOpenXml.Style.ExcelBorderStyle.Thin;
+                                cell_dato1.Style.Border.Left.Style = OfficeOpenXml.Style.ExcelBorderStyle.Thin;
+                                cell_dato1.Style.Border.Right.Style = OfficeOpenXml.Style.ExcelBorderStyle.Thin;
+                                //cell_dato1.Style.Numberformat.Format = "  ";
+                                cell_dato1.Style.HorizontalAlignment = ExcelHorizontalAlignment.Right;
+                                contador++;
+                            }
+                            iRenglonFila++;
+                        }
+
+
+                    }//FIN FOR QUE IMPRIME LAS 5 TABLAS
+                     //}
+                    catch (OutOfMemoryException)
+                    {
+                        //MessageBox.Show("Error en ejecutar ");
+                        GenerarReporteExcel(titulo, subTitulo, NombreReporte, dtDatos);
                     }
 
-
-                }//FIN FOR QUE IMPRIME LAS 5 TABLAS
-                //}
-                catch (OutOfMemoryException)
-                {
-                    //MessageBox.Show("Error en ejecutar ");
-                    GenerarReporteExcel(titulo, subTitulo, NombreReporte, dtDatos);
-                }
-
-                /*se guarda el archivo creado*/
-                string sNombreArchivo = (RutaReporte);
-                try
-                {
-                    Byte[] bin = p.GetAsByteArray();
-                    File.WriteAllBytes(@sNombreArchivo, bin);
-                    Application.DoEvents();
-                    return "Reporte generado en: " + RutaReporte;
-                }
-                catch (Exception ex)
-                {
-                    return "No se pudo generar el reporte, favor de validar que no este siendo utilizado o este abierto";
-                }
-            }//fin using
+                    /*se guarda el archivo creado*/
+                    string sNombreArchivo = (RutaReporte);
+                    try
+                    {
+                        Byte[] bin = p.GetAsByteArray();
+                        File.WriteAllBytes(@sNombreArchivo, bin);
+                        Application.DoEvents();
+                        return "Reporte generado en: " + RutaReporte;
+                    }
+                    catch (Exception ex)
+                    {
+                        return "No se pudo generar el reporte, favor de validar que no este siendo utilizado o este abierto";
+                    }
+                }//fin using
+            }
+            catch (IOException ioex)
+            {
+                return "No se pudo generar el reporte, favor de validar que exista la ruta:" + RutaReporte;
+            }
         }
 
         public static string regresarCelda(int contrador)
