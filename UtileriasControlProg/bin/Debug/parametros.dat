@@ -1,0 +1,99 @@
+[{"NombreMostrar":"Edad"
+,"NombreParametro":"[EDAD]"
+,"Bloque":1},
+{"NombreMostrar":"Fecha de Nacimiento"
+,"NombreParametro":"[FECHA DE NACIMIENTO]"
+,"Bloque":1},
+{"NombreMostrar":"Sexo"
+,"NombreParametro":"[SEXO]"
+,"Bloque":1},
+{"NombreMostrar":"Fecha de Alta"
+,"NombreParametro":"[FECHA DE ALTA]"
+,"Bloque":1},
+{"NombreMostrar":"Fecha de Antigüedad"
+,"NombreParametro":"[FECHA DE ANTIGÜEDAD]"
+,"Bloque":1},
+{"NombreMostrar":"Tipo de Nómina"
+,"NombreParametro":"[TIPO DE NOMINA]"
+,"Bloque":1},
+{"NombreMostrar":"Sección"
+,"NombreParametro":"[SECCION]"
+,"Bloque":1},
+{"NombreMostrar":"número y nombre de ciudad"
+,"NombreParametro":"[NÚMERO Y NOMBRE DE CIUDAD]"
+,"Bloque":1},
+{"NombreMostrar":"Región"
+,"NombreParametro":"[REGIÓN]"
+,"Bloque":1},
+{"NombreMostrar":"número y nombre de empresa"
+,"NombreParametro":"[NÚMERO Y NOMBRE DE EMPRESA]"
+,"Bloque":1},
+{"NombreMostrar":"nombre, num de empleado y puesto de Jefe 1"
+,"NombreParametro":"[NOMBRE, NUM DE EMPLEADO Y PUESTO DE JEFE 1]"
+,"Bloque":1},
+{"NombreMostrar":"nombre, num de empleado y puesto de Jefe 2"
+,"NombreParametro":"[NOMBRE, NUM DE EMPLEADO Y PUESTO DE JEFE 2]"
+,"Bloque":1},
+{"NombreMostrar":"nombre, num de empleado y puesto de Jefe 3"
+,"NombreParametro":"[NOMBRE, NUM DE EMPLEADO Y PUESTO DE JEFE 3]"
+,"Bloque":1},
+{"NombreMostrar":"RFC"
+,"NombreParametro":"[RFC]"
+,"Bloque":2},
+{"NombreMostrar":"NSS"
+,"NombreParametro":"[NSS]"
+,"Bloque":2},
+{"NombreMostrar":"CURP"
+,"NombreParametro":"[CURP]"
+,"Bloque":2},
+{"NombreMostrar":"Afiliado a AforeCoppel"
+,"NombreParametro":"[- Afiliado a AforeCoppel (SI/NO)]"
+,"Bloque":2},
+{"NombreMostrar":"Saldo Fondo Trabajador"
+,"NombreParametro":"[- SALDO FONDO TRABAJADOR]"
+,"Bloque":3},
+{"NombreMostrar":"Saldo Fondo Empresa"
+,"NombreParametro":"[- SALDO FONDO EMPRESA]"
+,"Bloque":3},
+{"NombreMostrar":"Saldo Cuenta Corriente"
+,"NombreParametro":"[- SALDO CUENTA CORRIENTE]"
+,"Bloque":3},
+{"NombreMostrar":"Saldo Autocop"
+,"NombreParametro":"[- SALDO AUTOCOP]"
+,"Bloque":3},
+{"NombreMostrar":"Saldo Ahorro Adicional I"
+,"NombreParametro":"[- SALDO AHORRO ADICIONAL I]"
+,"Bloque":3},
+{"NombreMostrar":"Saldo Ahorro Adicional II"
+,"NombreParametro":"[- SALDO AHORRO ADICIONAL II]"
+,"Bloque":3},
+{"NombreMostrar":"Saldo FAER Trabajador"
+,"NombreParametro":"[- SALDO FAER TRABAJADOR]"
+,"Bloque":3},
+{"NombreMostrar":"Saldo FAER Empresa"
+,"NombreParametro":"[- SALDO FAER EMPRESA]"
+,"Bloque":3},
+{"NombreMostrar":"Descuento cuenta corriente"
+,"NombreParametro":"[- DESCUENTO CUENTA CORRIENTE]"
+,"Bloque":3},
+{"NombreMostrar":"Aportación Fondo Ahorro empresa"
+,"NombreParametro":"[- APORTACIÓN FONDO AHORRO EMPRESA]"
+,"Bloque":3},
+{"NombreMostrar":"Aportación Fondo Ahorro empleado"
+,"NombreParametro":"[- APORTACIÓN FONDO AHORRO EMPLEADO]"
+,"Bloque":3},
+{"NombreMostrar":"Aportación Adicional  Fondo Ahorro empleado"
+,"NombreParametro":"[- APORTACIÓN ADICIONAL  FONDO AHORRO EMPLEADO]"
+,"Bloque":3},
+{"NombreMostrar":"Aportación ahorro especial"
+,"NombreParametro":"[- APORTACIÓN AHORRO ESPECIAL]"
+,"Bloque":3},
+{"NombreMostrar":"Aportación Ahorro extraordinario trabajador"
+,"NombreParametro":"[- APORTACIÓN AHORRO EXTRAORDINARIO TRABAJADOR]"
+,"Bloque":3},
+{"NombreMostrar":"Aportación ahorro extraordinario empresa"
+,"NombreParametro":"[- APORTACIÓN AHORRO EXTRAORDINARIO EMPRESA]"
+,"Bloque":3},
+{"NombreMostrar":"Incentivo Fondo extraordinario empresa"
+,"NombreParametro":"[- INCENTIVO FONDO EXTRAORDINARIO EMPRESA]"
+,"Bloque":3}]

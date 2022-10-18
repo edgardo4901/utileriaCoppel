@@ -32,8 +32,8 @@ namespace UtileriasControlProg.Entity
 
         public static string fileEmpleado = "empleado.dat";
         public static string fileIps = "ip.dat";
-        public static string centros = @"C:\UtileriasControlProg\centros.dat";
-        public static string parametros = @"C:\UtileriasControlProg\parametros.dat";
+        public static string centros = "centros.dat";
+        public static string parametros = "parametros.dat";
         public static string encodingEmpleado = "ESTE EL NUMERO DE EMPLEADO NO SEAS METICHE TE LA TIRAS DE HACKER MAN ||||||||||";
         public static string encodingIP = "ESTE EL IP DE LA MICRO DE COPPEL DE LA RED INTERNA NO SEAS METICHE TE LA TIRAS DE HACKER MAN ||||||||||";
 

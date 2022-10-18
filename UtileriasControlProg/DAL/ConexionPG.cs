@@ -21,19 +21,19 @@ namespace UtileriasControlProg.DAL
         {
             NpgsqlConnectionStringBuilder connstring = new NpgsqlConnectionStringBuilder();
             //pruebas
-            connstring.Host = "10.27.113.144";
+            /*connstring.Host = "10.27.113.144";
             connstring.Database = "nominacontabilidad";
             connstring.UserName = "syscarterasemisiones";
             connstring.Password = "986d07369215b51a3a257473b4ee917b";
             connstring.Enlist = true;
-            //connstring.Port = 5432;
+            //connstring.Port = 5432;*/
 
-            /*connstring.Host = "10.44.1.12";
+            connstring.Host = "10.44.1.12";
             connstring.Database = "nominacontabilidad";
             connstring.UserName = "sysingresos";
             connstring.Password = "1299e3097ebcb90b651b4510559c63a7";
             connstring.Enlist = true;
-            //connstring.Port = 5432;*/
+            //connstring.Port = 5432;
 
             connstring.Timeout = 1024;
 

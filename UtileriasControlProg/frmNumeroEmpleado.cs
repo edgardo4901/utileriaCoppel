@@ -116,14 +116,23 @@ namespace UtileriasControlProg
 
                 foreach (CentrosAutorizados element in lstcentros)
                 {
-                    if (element.Centro == NumeroCentro)
+                    if (element.Centro == NumeroCentro && !existe)
                     {
                         existe = true;
                         Entity.Configuracion.MostrarBloque1 = element.MostrarBloque1;
                         Entity.Configuracion.MostrarBloque2 = element.MostrarBloque2;
                         Entity.Configuracion.MostrarBloque3 = element.MostrarBloque3;
                         Entity.Configuracion.SoloColaboradores = element.SoloColaboradores;
-                        break;
+                        //break;
+                    }
+                    else if (element.Centro == NumeroCentro && element.SoloColaboradores.Contains(NumEmpleado.ToString()))
+                    {
+                        existe = true;
+                        Entity.Configuracion.MostrarBloque1 = element.MostrarBloque1;
+                        Entity.Configuracion.MostrarBloque2 = element.MostrarBloque2;
+                        Entity.Configuracion.MostrarBloque3 = element.MostrarBloque3;
+                        Entity.Configuracion.SoloColaboradores = element.SoloColaboradores;
+                        //break;
                     }
                 }
                 if (existe)

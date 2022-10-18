@@ -45,6 +45,8 @@ namespace UtileriasControlProg.UI.Personal
         bool seleccionoCurp = false;
         bool seleccionoRfc = false;
         bool seleccionoIncentivo = false;
+        bool botonPaginador1 = false;
+        bool botonPaginador2 = false;
         public frmReporteDinamico()
         {
             InitializeComponent();
@@ -67,6 +69,25 @@ namespace UtileriasControlProg.UI.Personal
                 //MessageBox.Show(ex.ToString(), nombreSolucion, MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 //return false;
             }
+        }
+
+        protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
+        {
+            bool bHandled = false;
+            switch (keyData)
+            {
+                case Keys.F5:
+                    bHandled = true;
+                    consultarInformacion(false, true);
+                    break;
+                case Keys.F9:
+                    bHandled = true;
+                    registrosoagina = 100;
+                    pagina = 1;
+                    consultarInformacion(true, false);
+                    break;
+            }
+            return bHandled;
         }
 
         public void cargarConfiguraciones()
@@ -128,10 +149,12 @@ namespace UtileriasControlProg.UI.Personal
             if (!Configuracion.MostrarBloque2)
             {
                 chklstboxBloque2.Visible = false;
+                lblCamposbloque2.Visible = false;
             }
             if (!Configuracion.MostrarBloque3)
             {
                 chklstboxBloque3.Visible = false;
+                lblCampoIncentivo.Visible = false;
             }
         }
 
@@ -327,11 +350,13 @@ namespace UtileriasControlProg.UI.Personal
                 return;
             }*/
 
-            string consultaValores = "SELECT DISTINCT ROW_NUMBER() OVER(ORDER BY sce.Numemp DESC) AS Renglon,";
+            //string consultaValores = "SELECT DISTINCT 1 AS Renglon,";
+            /*string consultaValores = "SELECT DISTINCT TOP 2000 ";
             if (esExcel)
             {
                 consultaValores = "SELECT DISTINCT ";
-            }
+            }*/
+            string consultaValores = "SELECT DISTINCT ";
             //valores iniciales
             consultaValores += "sce.NumeroPuesto AS [# PUESTO],";
             consultaValores += "scp.nombre AS [NOMBRE PUESTO],";
@@ -451,7 +476,8 @@ namespace UtileriasControlProg.UI.Personal
                                         " AND scc.seccion = CASE @Seccion WHEN 0 THEN  scc.seccion ELSE @Seccion END";
             if (!esExcel)
             {
-                validacionesConsulta += " DELETE from #tmpConcentradoEmpleados where Renglon not between @RenglonInicial and @RenglonFinal ";
+                //validacionesConsulta += " UPDATE #tmpConcentradoEmpleados SET Renglon = temp.reng FROM ( SELECT NUMEMP, ROW_NUMBER() OVER(ORDER BY NUMEMP DESC) as reng FROM #tmpConcentradoEmpleados)temp where #tmpConcentradoEmpleados.NUMEMP = temp.NUMEMP ";
+                //validacionesConsulta += " DELETE from #tmpConcentradoEmpleados where Renglon not between @RenglonInicial and @RenglonFinal ";
             }
 
             validacionesConsulta = validacionesConsulta + " DECLARE @FechaMovimientos DATE = (SELECT MAX(fecha) FROM fondo.dbo.fa_movs_histo_edoctas)" +
@@ -524,11 +550,12 @@ namespace UtileriasControlProg.UI.Personal
                                    " where a.[TIPO DE NOMINA] = 3";
 
             //se recorren los campos seleccionados
-            string camposSeleccionar = " SELECT Renglon,";
+            /*string camposSeleccionar = " SELECT Renglon,";
             if (esExcel)
             {
                 camposSeleccionar = " SELECT ";
-            }
+            }*/
+            string camposSeleccionar = " SELECT ";
             camposSeleccionar += "[# PUESTO],";
             camposSeleccionar += "[NOMBRE PUESTO],";
             camposSeleccionar += "[CIUDAD],";
@@ -585,7 +612,7 @@ namespace UtileriasControlProg.UI.Personal
             //si es distinto de excel se ordena por el renglon insertado
             if (!esExcel)
             {
-                camposSeleccionar += " Order by Renglon asc";
+                //camposSeleccionar += " Order by Renglon asc";
             }
             camposSeleccionar += " drop table #tmpConcentradoMovimientosFondo";
             camposSeleccionar += " drop table #tmpConcentradoEmpleados";
@@ -871,6 +898,10 @@ namespace UtileriasControlProg.UI.Personal
             }
             else
             {
+                botonPaginador1 = btnMas.Enabled;
+                botonPaginador2 = btnMenos.Enabled;
+                btnMas.Enabled = false;
+                btnMenos.Enabled = false;
                 btnExcel.Text = "Exportando...";
             }
             btnConsultar.Enabled = false;
@@ -895,6 +926,8 @@ namespace UtileriasControlProg.UI.Personal
             else
             {
                 btnExcel.Text = "F5 Exportar";
+                btnMas.Enabled = botonPaginador1;
+                btnMenos.Enabled = botonPaginador2;
             }
             if (mensaje != "")
             {

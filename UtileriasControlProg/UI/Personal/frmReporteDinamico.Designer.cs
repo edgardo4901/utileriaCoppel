@@ -57,6 +57,8 @@ namespace UtileriasControlProg.UI.Personal
             this.btnMenos = new System.Windows.Forms.Button();
             this.lblPagina = new System.Windows.Forms.Label();
             this.btnMas = new System.Windows.Forms.Button();
+            this.lblCamposbloque2 = new System.Windows.Forms.Label();
+            this.lblCampoIncentivo = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvConsulta)).BeginInit();
             this.SuspendLayout();
@@ -279,9 +281,9 @@ namespace UtileriasControlProg.UI.Personal
             // 
             this.groupBox1.Controls.Add(this.chkSueldo);
             this.groupBox1.Controls.Add(this.chkAntiguedad);
-            this.groupBox1.Location = new System.Drawing.Point(1410, 189);
+            this.groupBox1.Location = new System.Drawing.Point(1594, 335);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(268, 107);
+            this.groupBox1.Size = new System.Drawing.Size(108, 59);
             this.groupBox1.TabIndex = 22;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Ordenar Por:";
@@ -307,6 +309,7 @@ namespace UtileriasControlProg.UI.Personal
             this.btnMenos.TabIndex = 24;
             this.btnMenos.Text = "<";
             this.btnMenos.UseVisualStyleBackColor = true;
+            this.btnMenos.Visible = false;
             this.btnMenos.Click += new System.EventHandler(this.btnMenos_Click);
             // 
             // lblPagina
@@ -317,6 +320,7 @@ namespace UtileriasControlProg.UI.Personal
             this.lblPagina.TabIndex = 25;
             this.lblPagina.Text = "0/0";
             this.lblPagina.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.lblPagina.Visible = false;
             // 
             // btnMas
             // 
@@ -326,13 +330,36 @@ namespace UtileriasControlProg.UI.Personal
             this.btnMas.TabIndex = 26;
             this.btnMas.Text = ">";
             this.btnMas.UseVisualStyleBackColor = true;
+            this.btnMas.Visible = false;
             this.btnMas.Click += new System.EventHandler(this.btnMas_Click);
+            // 
+            // lblCamposbloque2
+            // 
+            this.lblCamposbloque2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblCamposbloque2.ForeColor = System.Drawing.Color.Red;
+            this.lblCamposbloque2.Location = new System.Drawing.Point(1395, 181);
+            this.lblCamposbloque2.Name = "lblCamposbloque2";
+            this.lblCamposbloque2.Size = new System.Drawing.Size(292, 107);
+            this.lblCamposbloque2.TabIndex = 27;
+            this.lblCamposbloque2.Text = "Los campos de este bloque necesitan red interna para consultarse";
+            // 
+            // lblCampoIncentivo
+            // 
+            this.lblCampoIncentivo.Font = new System.Drawing.Font("Microsoft Sans Serif", 7F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblCampoIncentivo.ForeColor = System.Drawing.Color.Red;
+            this.lblCampoIncentivo.Location = new System.Drawing.Point(1046, 404);
+            this.lblCampoIncentivo.Name = "lblCampoIncentivo";
+            this.lblCampoIncentivo.Size = new System.Drawing.Size(339, 40);
+            this.lblCampoIncentivo.TabIndex = 28;
+            this.lblCampoIncentivo.Text = "El campo Incentivo Fondo extraordinario empresa relentiza la consulta";
             // 
             // frmReporteDinamico
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1750, 916);
+            this.Controls.Add(this.lblCampoIncentivo);
+            this.Controls.Add(this.lblCamposbloque2);
             this.Controls.Add(this.btnMas);
             this.Controls.Add(this.lblPagina);
             this.Controls.Add(this.btnMenos);
@@ -399,5 +426,7 @@ namespace UtileriasControlProg.UI.Personal
         private System.Windows.Forms.Button btnMenos;
         private System.Windows.Forms.Label lblPagina;
         private System.Windows.Forms.Button btnMas;
+        private System.Windows.Forms.Label lblCamposbloque2;
+        private System.Windows.Forms.Label lblCampoIncentivo;
     }
 }
