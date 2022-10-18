@@ -35,6 +35,7 @@ namespace UtileriasControlProg.UI.Personal
         DataTable dtConsultaHojaVida;
         DataTable dtConsultaPostgres;
         DataTable dtConsultaIncentivo;
+        List<string> listadoNumEmpleados;
         int pagina = 0;
         int totalpaginas = 0;
         int totalregistros = 0;
@@ -318,6 +319,7 @@ namespace UtileriasControlProg.UI.Personal
             seleccionoNss = false;
             seleccionoRfc = false;
             seleccionoIncentivo = false;
+            listadoNumEmpleados = new List<string>();
 
             if (txtDescripcionDel.Text.ToString().Trim() != "")
             {
@@ -720,83 +722,114 @@ namespace UtileriasControlProg.UI.Personal
         }
         private void consultarAfiliadoHojaVida()
         {
-            string query = "select idu_colaborador AS [NumEmp],CASE idu_afore WHEN 568 THEN 'SI' ELSE 'NO' END [-Afiliado a AforeCoppel(SI / NO)] from[dbo].[ctl_colaboradores] where idu_colaborador in (" + numeroEmpleados() + ")";
-            dtConsultaHojaVida = oConexion.ConsultaSqlDataTable(conexion_hojavida, query, CommandType.Text);
-            foreach (DataRow row in dtConsultaHojaVida.Rows)
+            if(listadoNumEmpleados.Count <= 0)
             {
-                DataRow dr = dtConsulta.Select("NUMEMP=" + row["NumEmp"].ToString()).FirstOrDefault();
-                if (dr != null)
+                numeroEmpleados();
+            }
+            foreach (string lempleados in listadoNumEmpleados)
+            {
+                string query = "select idu_colaborador AS [NumEmp],CASE idu_afore WHEN 568 THEN 'SI' ELSE 'NO' END [-Afiliado a AforeCoppel(SI / NO)] from[dbo].[ctl_colaboradores] where idu_colaborador in (" + lempleados + ")";
+                dtConsultaHojaVida = oConexion.ConsultaSqlDataTable(conexion_hojavida, query, CommandType.Text);
+                foreach (DataRow row in dtConsultaHojaVida.Rows)
                 {
-                    dr["- Afiliado a AforeCoppel (SI/NO)"] = row["-Afiliado a AforeCoppel(SI / NO)"].ToString();
+                    DataRow dr = dtConsulta.Select("NUMEMP=" + row["NumEmp"].ToString()).FirstOrDefault();
+                    if (dr != null)
+                    {
+                        dr["- Afiliado a AforeCoppel (SI/NO)"] = row["-Afiliado a AforeCoppel(SI / NO)"].ToString();
+                    }
                 }
             }
         }
         private void consultarDatosIncentivo()
         {
+            if (listadoNumEmpleados.Count <= 0)
+            {
+                numeroEmpleados();
+            }
             dtConsultaIncentivo = new DataTable();
             string query = "Select convert(varchar(8),cast(MAX(fecha) as date),112) as fecha FROM fondo.dbo.fa_movs_histo_edoctas";
             dtConsultaIncentivo = oConexion.ConsultaSqlDataTable(conexion_principal, query, CommandType.Text);
             string fecha = dtConsultaIncentivo.Rows[0]["fecha"].ToString();
 
-            dtConsultaIncentivo = new DataTable();
-            NpgsqlConnection odbc = new NpgsqlConnection();
-            if (ConexionPG.abreconexionPG(ref odbc, 1))
+            foreach (string lempleados in listadoNumEmpleados)
             {
-                string querypos = "select numemp,tipomovimiento,importe from nommovimientoshistorico where tipomovimiento = 635 AND fecha = '" + fecha + "'" + " AND NUMEMP in (" + numeroEmpleados() + ")";
-                dtConsultaIncentivo = ConexionPG.fEjecutarConsulta(querypos, odbc);
-                foreach (DataRow row in dtConsultaIncentivo.Rows)
+                dtConsultaIncentivo = new DataTable();
+                NpgsqlConnection odbc = new NpgsqlConnection();
+                if (ConexionPG.abreconexionPG(ref odbc, 1))
                 {
-                    DataRow dr = dtConsulta.Select("NUMEMP=" + row["numemp"].ToString()).FirstOrDefault();
-                    if (dr != null)
+                    string querypos = "select numemp,tipomovimiento,importe from nommovimientoshistorico where tipomovimiento = 635 AND fecha = '" + fecha + "'" + " AND NUMEMP in (" + lempleados + ")";
+                    dtConsultaIncentivo = ConexionPG.fEjecutarConsulta(querypos, odbc);
+                    foreach (DataRow row in dtConsultaIncentivo.Rows)
                     {
-                        dr["- INCENTIVO FONDO EXTRAORDINARIO EMPRESA"] = double.Parse(row["importe"].ToString());
+                        DataRow dr = dtConsulta.Select("NUMEMP=" + row["numemp"].ToString()).FirstOrDefault();
+                        if (dr != null)
+                        {
+                            dr["- INCENTIVO FONDO EXTRAORDINARIO EMPRESA"] = double.Parse(row["importe"].ToString());
+                        }
                     }
                 }
+                ConexionPG.cierraconexionPG(odbc);
             }
-            ConexionPG.cierraconexionPG(odbc);
         }
         private void consultarDatosPostres()
         {
-            dtConsultaPostgres = new DataTable();
-            NpgsqlConnection odbc = new NpgsqlConnection();
-            if (ConexionPG.abreconexionPG(ref odbc,1))
+            if (listadoNumEmpleados.Count <= 0)
             {
-                string querypos = "SELECT DISTINCT numemp,curp,rfc,numeroafiliacion FROM NomHistoricoEmpleados WHERE NUMEMP in (" + numeroEmpleados() + ")";
-                dtConsultaPostgres = ConexionPG.fEjecutarConsulta(querypos, odbc);
-
-                foreach (DataRow row in dtConsultaPostgres.Rows)
+                numeroEmpleados();
+            }
+            foreach (string lempleados in listadoNumEmpleados)
+            {
+                dtConsultaPostgres = new DataTable();
+                NpgsqlConnection odbc = new NpgsqlConnection();
+                if (ConexionPG.abreconexionPG(ref odbc, 1))
                 {
-                    DataRow dr = dtConsulta.Select("NUMEMP=" + row["NumEmp"].ToString()).FirstOrDefault();
-                    if (dr != null)
+                    string querypos = "SELECT DISTINCT numemp,curp,rfc,numeroafiliacion FROM NomHistoricoEmpleados WHERE NUMEMP in (" + lempleados + ")";
+                    dtConsultaPostgres = ConexionPG.fEjecutarConsulta(querypos, odbc);
+
+                    foreach (DataRow row in dtConsultaPostgres.Rows)
                     {
-                        if (seleccionoRfc)
+                        DataRow dr = dtConsulta.Select("NUMEMP=" + row["NumEmp"].ToString()).FirstOrDefault();
+                        if (dr != null)
                         {
-                            dr["RFC"] = row["rfc"].ToString();
-                        }
-                        if (seleccionoCurp)
-                        {
-                            dr["CURP"] = row["curp"].ToString();
-                        }
-                        if (seleccionoNss)
-                        {
-                            dr["NSS"] = row["numeroafiliacion"].ToString();
+                            if (seleccionoRfc)
+                            {
+                                dr["RFC"] = row["rfc"].ToString();
+                            }
+                            if (seleccionoCurp)
+                            {
+                                dr["CURP"] = row["curp"].ToString();
+                            }
+                            if (seleccionoNss)
+                            {
+                                dr["NSS"] = row["numeroafiliacion"].ToString();
+                            }
                         }
                     }
                 }
+                ConexionPG.cierraconexionPG(odbc);
             }
-            ConexionPG.cierraconexionPG(odbc);
         }
         private string numeroEmpleados()
         {
             string numeros = "";
+            int contador = 0;
             foreach (DataRow row in dtConsulta.Rows)
             {
+                if(contador == 5000)
+                {
+                    listadoNumEmpleados.Add(numeros);
+                    numeros = "";
+                    contador = 0;
+                }
+
                 if(numeros != "")
                 {
                     numeros += ",";
                 }
                 numeros += row["NUMEMP"].ToString();
+                contador++;
             }
+            listadoNumEmpleados.Add(numeros);
             return numeros;
         }
         private void txtDelCentro_KeyPress(object sender, KeyPressEventArgs e)
