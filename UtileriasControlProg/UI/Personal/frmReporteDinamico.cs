@@ -352,13 +352,11 @@ namespace UtileriasControlProg.UI.Personal
                 return;
             }*/
 
-            //string consultaValores = "SELECT DISTINCT 1 AS Renglon,";
-            /*string consultaValores = "SELECT DISTINCT TOP 2000 ";
+            string consultaValores = "SELECT DISTINCT 1 AS Renglon,";
             if (esExcel)
             {
                 consultaValores = "SELECT DISTINCT ";
-            }*/
-            string consultaValores = "SELECT DISTINCT ";
+            }
             //valores iniciales
             consultaValores += "sce.NumeroPuesto AS [# PUESTO],";
             consultaValores += "scp.nombre AS [NOMBRE PUESTO],";
@@ -552,12 +550,11 @@ namespace UtileriasControlProg.UI.Personal
                                    " where a.[TIPO DE NOMINA] = 3";
 
             //se recorren los campos seleccionados
-            /*string camposSeleccionar = " SELECT Renglon,";
+            string camposSeleccionar = " SELECT ROW_NUMBER() OVER(ORDER BY Renglon DESC) as Renglon,";
             if (esExcel)
             {
                 camposSeleccionar = " SELECT ";
-            }*/
-            string camposSeleccionar = " SELECT ";
+            }
             camposSeleccionar += "[# PUESTO],";
             camposSeleccionar += "[NOMBRE PUESTO],";
             camposSeleccionar += "[CIUDAD],";
