@@ -84,21 +84,35 @@ namespace UtileriasControlProg.DAL
                 {
                     try
                     {
+
+                        BO.UtileriasBO.LogSeguimiento("ConsultaSqlDataTable", "Conexion: " + ConnectionString);
+
                         command.CommandTimeout = 0;
                         command.CommandText = commandText;
                         command.CommandType = commandType;
                         if (parameters != null) { command.Parameters.AddRange(parameters); }
+                        BO.UtileriasBO.LogSeguimiento("ConsultaSqlDataTable", "Estableciendo Conexion");
                         connection.Open();
+                        BO.UtileriasBO.LogSeguimiento("ConsultaSqlDataTable", "Conexion Establecida");
+                        BO.UtileriasBO.LogSeguimiento("ConsultaSqlDataTable", "Leyendo Informacion");
                         using (var reader = command.ExecuteReader())
                         {
                             dt.Load(reader);
                         }
+                        BO.UtileriasBO.LogSeguimiento("ConsultaSqlDataTable", "Termino Leer Informacion");
                         connection.Close();
+                        BO.UtileriasBO.LogSeguimiento("ConsultaSqlDataTable", "Cierra Conexion");
                     }
 
                     catch (Exception ex)
                     {
+                        BO.UtileriasBO.LogSeguimiento("ConsultaSqlDataTable", "Error: " + ex.Message);
                         throw new Exception(ex.Message);
+                    }
+                    finally {
+                        if (connection.State == ConnectionState.Open) {
+                            connection.Close();
+                        }
                     }
                 }
                 return dt;

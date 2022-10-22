@@ -59,6 +59,7 @@ namespace UtileriasControlProg.UI.Personal
             this.btnMas = new System.Windows.Forms.Button();
             this.lblCamposbloque2 = new System.Windows.Forms.Label();
             this.lblCampoIncentivo = new System.Windows.Forms.Label();
+            this.progressBar1 = new System.Windows.Forms.ProgressBar();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvConsulta)).BeginInit();
             this.SuspendLayout();
@@ -353,11 +354,19 @@ namespace UtileriasControlProg.UI.Personal
             this.lblCampoIncentivo.TabIndex = 28;
             this.lblCampoIncentivo.Text = "El campo Incentivo Fondo extraordinario empresa relentiza la consulta";
             // 
+            // progressBar1
+            // 
+            this.progressBar1.Location = new System.Drawing.Point(47, 413);
+            this.progressBar1.Name = "progressBar1";
+            this.progressBar1.Size = new System.Drawing.Size(993, 31);
+            this.progressBar1.TabIndex = 29;
+            // 
             // frmReporteDinamico
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1750, 916);
+            this.Controls.Add(this.progressBar1);
             this.Controls.Add(this.lblCampoIncentivo);
             this.Controls.Add(this.lblCamposbloque2);
             this.Controls.Add(this.btnMas);
@@ -428,5 +437,6 @@ namespace UtileriasControlProg.UI.Personal
         private System.Windows.Forms.Button btnMas;
         private System.Windows.Forms.Label lblCamposbloque2;
         private System.Windows.Forms.Label lblCampoIncentivo;
+        private System.Windows.Forms.ProgressBar progressBar1;
     }
 }

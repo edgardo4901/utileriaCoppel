@@ -40,24 +40,26 @@ namespace UtileriasControlProg.DAL
             return connstring;
         }
 
-        public static bool abreconexionPG(ref NpgsqlConnection conexion,int tipo)
+        public static bool abreconexionPG(ref NpgsqlConnection conexion, int tipo)
         {
             String sMensaje = "";
             bool bRegresa = false;
 
             conexion.ConnectionString = psqlConnBuild(1).ConnectionString;
-
+            BO.UtileriasBO.LogSeguimiento("abreconexionPG", conexion.ConnectionString);
             try
             {
                 conexion.Open();
                 if (conexion.State == ConnectionState.Open)
                 {
+                    BO.UtileriasBO.LogSeguimiento("abreconexionPG", "Conexion establecida");
                     bRegresa = true;
                 }
             }
             catch (OdbcException oe)
             {
                 sMensaje = "No se pudo establecer la conexión al servidor ";
+                BO.UtileriasBO.LogSeguimiento("abreconexionPG", sMensaje + oe.Message);
                 bRegresa = false;
             }
 
@@ -66,9 +68,11 @@ namespace UtileriasControlProg.DAL
 
         public static void cierraconexionPG(NpgsqlConnection conexion)
         {
+            BO.UtileriasBO.LogSeguimiento("cierraconexionPG", "Cerrando Conexion");
             if (conexion.State == ConnectionState.Open)
             {
                 conexion.Close();
+                BO.UtileriasBO.LogSeguimiento("cierraconexionPG", "Conexion cerrada");
             }
         }
 

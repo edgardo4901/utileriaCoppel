@@ -50,7 +50,8 @@ namespace UtileriasControlProg.UI.Personal
         bool botonPaginador2 = false;
         public frmReporteDinamico()
         {
-            InitializeComponent();
+            CheckForIllegalCrossThreadCalls = false;
+            InitializeComponent();            
             this.AutoSize = true;
             this.AutoSizeMode = AutoSizeMode.GrowAndShrink;
             this.Text = "Reporte Dinamico";
@@ -670,18 +671,28 @@ namespace UtileriasControlProg.UI.Personal
                 try
                 {
                     dtConsulta = oConexion.ConsultaSqlDataTable(conexion_principal, query, CommandType.Text);
+                    progressBar1.Value = 1;
+                    progressBar1.Update();
+
                     if (seleccionoAfiliado)
                     {
-                        consultarAfiliadoHojaVida();
+                        consultarAfiliadoHojaVida();                        
                     }
+                    progressBar1.Value = 2;
+                    progressBar1.Update();
                     if (seleccionoIncentivo)
                     {
-                        consultarDatosIncentivo();
+                        consultarDatosIncentivo();                        
                     }
+                    progressBar1.Value = 3;
+                    progressBar1.Update();
+
                     if (seleccionoCurp || seleccionoNss || seleccionoRfc)
                     {
                         consultarDatosPostres();
                     }
+                    progressBar1.Value = 4;
+                    progressBar1.Update();
                     if (dtConsulta.Rows.Count <= 0)
                     {
                         respuesta = "No hay información con los filtros seleccionado";
@@ -719,92 +730,129 @@ namespace UtileriasControlProg.UI.Personal
         }
         private void consultarAfiliadoHojaVida()
         {
-            if(listadoNumEmpleados.Count <= 0)
+            try
             {
-                numeroEmpleados();
-            }
-            foreach (string lempleados in listadoNumEmpleados)
-            {
-                string query = "select idu_colaborador AS [NumEmp],CASE idu_afore WHEN 568 THEN 'SI' ELSE 'NO' END [-Afiliado a AforeCoppel(SI / NO)] from[dbo].[ctl_colaboradores] where idu_colaborador in (" + lempleados + ")";
-                dtConsultaHojaVida = oConexion.ConsultaSqlDataTable(conexion_hojavida, query, CommandType.Text);
-                foreach (DataRow row in dtConsultaHojaVida.Rows)
-                {
-                    DataRow dr = dtConsulta.Select("NUMEMP=" + row["NumEmp"].ToString()).FirstOrDefault();
-                    if (dr != null)
-                    {
-                        dr["- Afiliado a AforeCoppel (SI/NO)"] = row["-Afiliado a AforeCoppel(SI / NO)"].ToString();
-                    }
-                }
-            }
-        }
-        private void consultarDatosIncentivo()
-        {
-            if (listadoNumEmpleados.Count <= 0)
-            {
-                numeroEmpleados();
-            }
-            dtConsultaIncentivo = new DataTable();
-            string query = "Select convert(varchar(8),cast(MAX(fecha) as date),112) as fecha FROM fondo.dbo.fa_movs_histo_edoctas";
-            dtConsultaIncentivo = oConexion.ConsultaSqlDataTable(conexion_principal, query, CommandType.Text);
-            string fecha = dtConsultaIncentivo.Rows[0]["fecha"].ToString();
+                BO.UtileriasBO.LogSeguimiento("consultarAfiliadoHojaVida", "Leyendo informacion de la base de datos de HOJA DE VIDA");
 
-            foreach (string lempleados in listadoNumEmpleados)
-            {
-                dtConsultaIncentivo = new DataTable();
-                NpgsqlConnection odbc = new NpgsqlConnection();
-                if (ConexionPG.abreconexionPG(ref odbc, 1))
+                if (listadoNumEmpleados.Count <= 0)
                 {
-                    string querypos = "select numemp,tipomovimiento,importe from nommovimientoshistorico where tipomovimiento = 635 AND fecha = '" + fecha + "'" + " AND NUMEMP in (" + lempleados + ")";
-                    dtConsultaIncentivo = ConexionPG.fEjecutarConsulta(querypos, odbc);
-                    foreach (DataRow row in dtConsultaIncentivo.Rows)
-                    {
-                        DataRow dr = dtConsulta.Select("NUMEMP=" + row["numemp"].ToString()).FirstOrDefault();
-                        if (dr != null)
-                        {
-                            dr["- INCENTIVO FONDO EXTRAORDINARIO EMPRESA"] = double.Parse(row["importe"].ToString());
-                        }
-                    }
+                    numeroEmpleados();
                 }
-                ConexionPG.cierraconexionPG(odbc);
-            }
-        }
-        private void consultarDatosPostres()
-        {
-            if (listadoNumEmpleados.Count <= 0)
-            {
-                numeroEmpleados();
-            }
-            foreach (string lempleados in listadoNumEmpleados)
-            {
-                dtConsultaPostgres = new DataTable();
-                NpgsqlConnection odbc = new NpgsqlConnection();
-                if (ConexionPG.abreconexionPG(ref odbc, 1))
+                foreach (string lempleados in listadoNumEmpleados)
                 {
-                    string querypos = "SELECT DISTINCT numemp,curp,rfc,numeroafiliacion FROM NomHistoricoEmpleados WHERE NUMEMP in (" + lempleados + ")";
-                    dtConsultaPostgres = ConexionPG.fEjecutarConsulta(querypos, odbc);
-
-                    foreach (DataRow row in dtConsultaPostgres.Rows)
+                    string query = "select idu_colaborador AS [NumEmp],CASE idu_afore WHEN 568 THEN 'SI' ELSE 'NO' END [-Afiliado a AforeCoppel(SI / NO)] from[dbo].[ctl_colaboradores] where idu_colaborador in (" + lempleados + ")";
+                    dtConsultaHojaVida = oConexion.ConsultaSqlDataTable(conexion_hojavida, query, CommandType.Text);
+                    foreach (DataRow row in dtConsultaHojaVida.Rows)
                     {
                         DataRow dr = dtConsulta.Select("NUMEMP=" + row["NumEmp"].ToString()).FirstOrDefault();
                         if (dr != null)
                         {
-                            if (seleccionoRfc)
-                            {
-                                dr["RFC"] = row["rfc"].ToString();
-                            }
-                            if (seleccionoCurp)
-                            {
-                                dr["CURP"] = row["curp"].ToString();
-                            }
-                            if (seleccionoNss)
-                            {
-                                dr["NSS"] = row["numeroafiliacion"].ToString();
-                            }
+                            dr["- Afiliado a AforeCoppel (SI/NO)"] = row["-Afiliado a AforeCoppel(SI / NO)"].ToString();
                         }
                     }
                 }
-                ConexionPG.cierraconexionPG(odbc);
             }
+            catch (Exception ex) {
+                BO.UtileriasBO.LogSeguimiento("consultarAfiliadoHojaVida", "ERROR al leer la informacion de la base de datos de HOJA DE VIDA ERROR: " + ex.Message);
+            }
+
+            
+        }
+        private void consultarDatosIncentivo()
+        {
+            try
+            {
+
+                BO.UtileriasBO.LogSeguimiento("consultarDatosIncentivo", "Intentando consultar informacion del servidor POSTGRESQL");
+
+                if (listadoNumEmpleados.Count <= 0)
+                {
+                    numeroEmpleados();
+                }
+                dtConsultaIncentivo = new DataTable();
+                string query = "Select convert(varchar(8),cast(MAX(fecha) as date),112) as fecha FROM fondo.dbo.fa_movs_histo_edoctas";
+                BO.UtileriasBO.LogSeguimiento("consultarDatosIncentivo", "Obteniendo la fecha de SQL SERVER");
+                dtConsultaIncentivo = oConexion.ConsultaSqlDataTable(conexion_principal, query, CommandType.Text);
+                string fecha = dtConsultaIncentivo.Rows[0]["fecha"].ToString();
+
+                foreach (string lempleados in listadoNumEmpleados)
+                {
+                    dtConsultaIncentivo = new DataTable();
+                    NpgsqlConnection odbc = new NpgsqlConnection();
+                    BO.UtileriasBO.LogSeguimiento("consultarDatosIncentivo", "Estableciendo conexion ");
+                    if (ConexionPG.abreconexionPG(ref odbc, 1))
+                    {
+                        string querypos = "select numemp,tipomovimiento,importe from nommovimientoshistorico where tipomovimiento = 635 AND fecha = '" + fecha + "'" + " AND NUMEMP in (" + lempleados + ")";
+                        dtConsultaIncentivo = ConexionPG.fEjecutarConsulta(querypos, odbc);
+                        foreach (DataRow row in dtConsultaIncentivo.Rows)
+                        {
+                            DataRow dr = dtConsulta.Select("NUMEMP=" + row["numemp"].ToString()).FirstOrDefault();
+                            if (dr != null)
+                            {
+                                dr["- INCENTIVO FONDO EXTRAORDINARIO EMPRESA"] = double.Parse(row["importe"].ToString());
+                            }
+                        }
+                    }
+                    BO.UtileriasBO.LogSeguimiento("consultarDatosIncentivo", "Termino lectura de informacion de incentivo");
+                    ConexionPG.cierraconexionPG(odbc);
+                }
+            }
+            catch (Exception ex)
+            {
+                BO.UtileriasBO.LogSeguimiento("consultarDatosIncentivo", "Error al consultar informacion: " + ex.Message);
+            }
+
+
+
+        }
+        private void consultarDatosPostres()
+        {
+            try
+            {
+                BO.UtileriasBO.LogSeguimiento("consultarDatosPostres", "Consultando informacion del bloque 2");
+                if (listadoNumEmpleados.Count <= 0)
+                {
+                    numeroEmpleados();
+                }
+                foreach (string lempleados in listadoNumEmpleados)
+                {
+                    dtConsultaPostgres = new DataTable();
+                    NpgsqlConnection odbc = new NpgsqlConnection();
+                    if (ConexionPG.abreconexionPG(ref odbc, 1))
+                    {
+                        string querypos = "SELECT DISTINCT numemp,curp,rfc,numeroafiliacion FROM NomHistoricoEmpleados WHERE NUMEMP in (" + lempleados + ")";
+
+                        BO.UtileriasBO.LogSeguimiento("consultarDatosPostres", querypos);
+                        dtConsultaPostgres = ConexionPG.fEjecutarConsulta(querypos, odbc);
+
+                        foreach (DataRow row in dtConsultaPostgres.Rows)
+                        {
+                            DataRow dr = dtConsulta.Select("NUMEMP=" + row["NumEmp"].ToString()).FirstOrDefault();
+                            if (dr != null)
+                            {
+                                if (seleccionoRfc)
+                                {
+                                    dr["RFC"] = row["rfc"].ToString();
+                                }
+                                if (seleccionoCurp)
+                                {
+                                    dr["CURP"] = row["curp"].ToString();
+                                }
+                                if (seleccionoNss)
+                                {
+                                    dr["NSS"] = row["numeroafiliacion"].ToString();
+                                }
+                            }
+                        }
+                    }
+                    ConexionPG.cierraconexionPG(odbc);
+                }
+            }
+            catch (Exception ex) {
+                BO.UtileriasBO.LogSeguimiento("consultarDatosPostres", "Error al consultar la informacion: " + ex.Message);
+            }
+
+            
         }
         private string numeroEmpleados()
         {
@@ -919,8 +967,26 @@ namespace UtileriasControlProg.UI.Personal
         }
         private void iniciarEjecucion(bool esExcel)
         {
+            
+
+            cbEmpresa.Enabled = false;
+            cbCiudad.Enabled = false;
+            cbRegion.Enabled = false;
+            cbSeccion.Enabled = false;
+            cbZona.Enabled = false;
+            txtDelCentro.Enabled = false;
+            txtAlCentro.Enabled = false;
+
+            progressBar1.Style = ProgressBarStyle.Blocks;
+            progressBar1.Maximum = 4;
+            progressBar1.Value = 0;
+
             if (!esExcel)
             {
+                DataSet ds = new DataSet();
+                dgvConsulta.DataSource = ds;
+                dgvConsulta.Update();
+
                 lblPagina.Text = pagina.ToString() + "/" + totalpaginas.ToString();
                 btnMas.Enabled = false;
                 btnMenos.Enabled = false;
@@ -941,6 +1007,20 @@ namespace UtileriasControlProg.UI.Personal
         {
             btnConsultar.Enabled = true;
             btnExcel.Enabled = true;
+
+            cbEmpresa.Enabled = true;
+            cbCiudad.Enabled = true;
+            cbRegion.Enabled = true;
+            cbSeccion.Enabled = true;
+            cbZona.Enabled = true;
+            txtDelCentro.Enabled = true;
+            txtAlCentro.Enabled = true;
+
+            progressBar1.Style = ProgressBarStyle.Blocks;
+            progressBar1.Maximum = 4;
+            progressBar1.Value = 0;
+            progressBar1.Update();
+
             if (!esExcel)
             {
                 if (pagina < totalpaginas)
